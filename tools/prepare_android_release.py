@@ -134,6 +134,12 @@ def normalize(check_only: bool) -> None:
             "    input.pointerDown(8, layout.actionRect.center);\n\n    input.clear();",
             "    input.pointerDown(8, layout.actionRect.center);\n    input.pointerDown(9, layout.jumpRect.center);\n    input.pointerDown(10, layout.dashRect.center);\n    input.pointerDown(11, layout.dropRect.center);\n\n    input.clear();",
             check_only)
+    replace(
+        "app/flutter/test/ffi_layout_test.dart",
+        "expect(sizeOf<OdgArtifactSnapshot>(), 2576);",
+        "expect(sizeOf<OdgArtifactSnapshot>(), 3088);",
+        check_only,
+    )
 
     replace(
         "app/flutter/pubspec.yaml",
@@ -158,7 +164,7 @@ def normalize(check_only: bool) -> None:
             "if (generation != localGeneration) continue",
             "if (generation != localGeneration) return@synchronized", check_only)
 
-    bridge = "engine/src/android_bridge.c"
+    bridge = "engine/src/android.bridge.c"
     replace(
         bridge,
         "    (void)env; (void)self; odg_music_reset();\n}\n#endif\n",
@@ -191,6 +197,7 @@ def verify() -> None:
         "app/flutter/lib/src/platform/android_host.dart": ["bool get structurallyLoadable => !legacy && !corrupt;"],
         "app/flutter/lib/src/engine/game_runtime.dart": ["import 'dart:ffi' hide Size;"],
         "app/flutter/lib/src/ui/game_screen.dart": ["artifact: openedArtifact, onClose: widget.runtime.closeArtifact"],
+        "app/flutter/test/ffi_layout_test.dart": ["expect(sizeOf<OdgArtifactSnapshot>(), 3088);"],
         "app/flutter/test/input_router_test.dart": [
             "setActionsEnabled(action: true, movement: true, drop: true)",
             "setActionsEnabled(action: false, movement: false, drop: false)",
@@ -202,7 +209,7 @@ def verify() -> None:
             "Os.open(dir.absolutePath, OsConstants.O_RDONLY, 0)", "return@synchronized",
             'System.loadLibrary("odpar_territorial_domain")',
         ],
-        "engine/src/android_bridge.c": ["odg_android_bridge_nonempty_translation_unit"],
+        "engine/src/android.bridge.c": ["odg_android_bridge_nonempty_translation_unit"],
         "app/flutter/CMakeLists.txt": [
             '"${ODPAR_ENGINE_ROOT}/src/android_bridge.c"',
             'LINKER:-z,max-page-size=16384', 'LINKER:-z,common-page-size=16384',
@@ -226,6 +233,7 @@ def verify() -> None:
         ],
         "app/flutter/lib/src/engine/game_runtime.dart": ["import 'dart:ffi';"],
         "app/flutter/lib/src/ui/game_screen.dart": ["artifact: openedArtifact!"],
+        "app/flutter/test/ffi_layout_test.dart": ["expect(sizeOf<OdgArtifactSnapshot>(), 2576);"],
         "app/flutter/test/input_router_test.dart": [
             "setActionsEnabled(action: true, drop: true)",
             "setActionsEnabled(action: false, drop: false)",
