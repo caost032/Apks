@@ -1,0 +1,34 @@
+# Native / generated builds
+/build/
+*.o
+*.d
+*.so
+*.apk
+*.aab
+
+# Generated inspection output
+/artifacts/
+*.ppm
+*.log
+
+# Generated WASM bundles
+/app/web/odpar_territorial_domain.wasm
+/app/web/ODPAR_Territorial_Domain.html
+
+# Flutter / Dart
+/app/flutter/.dart_tool/
+/app/flutter/build/
+/app/flutter/dist/
+/app/flutter/.gradle/
+/app/flutter/android/.gradle/
+/app/flutter/android/local.properties
+
+# Python / editor / OS noise
+**/__pycache__/
+*.pyc
+*.tmp
+*.bak
+*.swp
+.DS_Store
+.idea/
+.vscode/
