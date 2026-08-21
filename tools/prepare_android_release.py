@@ -164,7 +164,7 @@ def normalize(check_only: bool) -> None:
             "if (generation != localGeneration) continue",
             "if (generation != localGeneration) return@synchronized", check_only)
 
-    bridge = "engine/src/android.bridge.c"
+    bridge = "engine/src/android_bridge.c"
     replace(
         bridge,
         "    (void)env; (void)self; odg_music_reset();\n}\n#endif\n",
@@ -209,7 +209,7 @@ def verify() -> None:
             "Os.open(dir.absolutePath, OsConstants.O_RDONLY, 0)", "return@synchronized",
             'System.loadLibrary("odpar_territorial_domain")',
         ],
-        "engine/src/android.bridge.c": ["odg_android_bridge_nonempty_translation_unit"],
+        "engine/src/android_bridge.c": ["odg_android_bridge_nonempty_translation_unit"],
         "app/flutter/CMakeLists.txt": [
             '"${ODPAR_ENGINE_ROOT}/src/android_bridge.c"',
             'LINKER:-z,max-page-size=16384', 'LINKER:-z,common-page-size=16384',
