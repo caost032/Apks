@@ -59,6 +59,29 @@ jobs:
           yes | "$SDKMANAGER" --licenses >/dev/null || true
           "$SDKMANAGER" "cmake;3.22.1"
 
+      - name: Apply verified Dart source fixes
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          host = Path('app/flutter/lib/src/platform/android_host.dart')
+          text = host.read_text()
+          old = '  bool structurallyLoadable => !legacy && !corrupt;'
+          new = '  bool get structurallyLoadable => !legacy && !corrupt;'
+          if text.count(old) != 1:
+              raise SystemExit('android_host.dart: expected structurallyLoadable source not found exactly once')
+          host.write_text(text.replace(old, new))
+
+          runtime = Path('app/flutter/lib/src/engine/game_runtime.dart')
+          text = runtime.read_text()
+          old = "import 'dart:ffi';"
+          new = "import 'dart:ffi' hide Size;"
+          if text.count(old) != 1:
+              raise SystemExit('game_runtime.dart: expected dart:ffi import not found exactly once')
+          runtime.write_text(text.replace(old, new))
+          PY
+
       - name: Flutter pub get
         working-directory: app/flutter
         run: flutter pub get
