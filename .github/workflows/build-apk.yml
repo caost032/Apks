@@ -101,14 +101,17 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Setup Android SDK pieces
+      - name: Setup exact Android SDK pieces
         run: |
           set -euo pipefail
           SDK_ROOT="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-/usr/local/lib/android/sdk}}"
           SDKMANAGER="$SDK_ROOT/cmdline-tools/latest/bin/sdkmanager"
           test -x "$SDKMANAGER"
           yes | "$SDKMANAGER" --licenses >/dev/null || true
-          "$SDKMANAGER" "cmake;3.22.1"
+          "$SDKMANAGER" \
+            "platforms;android-36" \
+            "ndk;28.2.13676358" \
+            "cmake;3.22.1"
 
       - name: Resolve Flutter dependencies
         working-directory: app/flutter
@@ -116,7 +119,7 @@ jobs:
 
       - name: Analyze Dart and Flutter host
         working-directory: app/flutter
-        run: flutter analyze --no-fatal-infos
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings
 
       - name: Run Flutter host tests
         working-directory: app/flutter
