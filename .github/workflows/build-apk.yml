@@ -1,0 +1,75 @@
+name: Build ODPAR Territorial Domain APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate ODPAR contract
+        run: |
+          set -euo pipefail
+          api="$(sed -n 's/^#define ODG_API_VERSION UINT32_C(\([0-9][0-9]*\)).*/\1/p' engine/include/odpar_game.h)"
+          abi="$(sed -n 's/^#define ODG_FFI_ABI_VERSION UINT32_C(\([0-9][0-9]*\)).*/\1/p' engine/include/odpar_game.h)"
+          save="$(sed -n 's/^#define ODG_SAVE_SCHEMA_VERSION UINT32_C(\([0-9][0-9]*\)).*/\1/p' engine/include/odpar_game.h)"
+          echo "API=$api ABI=$abi SAVE=$save"
+          test "$api" = "37"
+          test "$abi" = "9"
+          test "$save" = "25"
+          echo "ODPAR_API_VERSION=$api" >> "$GITHUB_ENV"
+          echo "ODPAR_ABI_VERSION=$abi" >> "$GITHUB_ENV"
+          echo "ODPAR_SAVE_VERSION=$save" >> "$GITHUB_ENV"
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Setup Android SDK pieces
+        run: |
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager "cmake;3.22.1" "ndk;27.0.12077973" || true
+
+      - name: Flutter pub get
+        working-directory: app/flutter
+        run: flutter pub get
+
+      - name: Build Android APK arm64
+        working-directory: app/flutter
+        run: |
+          set -euo pipefail
+          flutter build apk --release --target-platform android-arm64
+          mkdir -p "$GITHUB_WORKSPACE/out"
+          cp build/app/outputs/flutter-apk/app-release.apk "$GITHUB_WORKSPACE/out/ODPAR-Territorial-Domain-api${ODPAR_API_VERSION}-abi${ODPAR_ABI_VERSION}-save${ODPAR_SAVE_VERSION}-arm64.apk"
+          sha256sum "$GITHUB_WORKSPACE"/out/*.apk > "$GITHUB_WORKSPACE/out/SHA256SUMS.txt"
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ODPAR-Territorial-Domain-API37-ABI9-SAVE25-APK
+          path: out/*
+          if-no-files-found: error
+          retention-days: 30

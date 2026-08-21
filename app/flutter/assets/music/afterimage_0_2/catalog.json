@@ -1,0 +1,143 @@
+{
+  "schema": 1,
+  "catalog": "AFTERIMAGE 0.2",
+  "owner": "kaost032",
+  "featured_in": "ODPAR: Territorial Domain",
+  "original_track_count": 7,
+  "instrumental_rework_count": 5,
+  "rights_notice": "Music catalog by kaost032. Included catalog owned/licensed by kaost032.",
+  "tracks": [
+    {
+      "id": "afterimage-original-01",
+      "title": "Half-Second Lag",
+      "artist": "kaost032",
+      "kind": "original",
+      "file": "01_half_second_lag.mp3",
+      "source_drive_title": "Half-Second Lag.mp3",
+      "size_bytes": 10101269,
+      "duration_ms": 252504,
+      "sha256": "985c56c6fa5927cc226740988c658cb0647b808659ffd1837295a1d4a6594570"
+    },
+    {
+      "id": "afterimage-original-02",
+      "title": "Not Quiet",
+      "artist": "kaost032",
+      "kind": "original",
+      "file": "02_not_quiet.mp3",
+      "source_drive_title": "Not Quiet.mp3",
+      "size_bytes": 9880469,
+      "duration_ms": 246984,
+      "sha256": "598a6fcabaeba83920f680d9c3908f8da666bcf9ef5ab9fe419afecca67d3c37"
+    },
+    {
+      "id": "afterimage-original-03",
+      "title": "Hear Myself Breathe",
+      "artist": "kaost032",
+      "kind": "original",
+      "file": "03_hear_myself_breathe.mp3",
+      "source_drive_title": "Hear Myself Breathe.mp3",
+      "size_bytes": 10170389,
+      "duration_ms": 254232,
+      "sha256": "05fdfd0a2bad8ae3b2e36fb613c0fd5c35a4c8581b84c1a14bb2098ce66d8a07"
+    },
+    {
+      "id": "afterimage-original-04",
+      "title": "Quiet, Not Empty",
+      "artist": "kaost032",
+      "kind": "original",
+      "file": "04_quiet_not_empty.mp3",
+      "source_drive_title": "Quiet, Not Empty.mp3",
+      "size_bytes": 12049109,
+      "duration_ms": 301200,
+      "sha256": "b4685e4d6d8e7ff02068fd417bd4c52bf74dfd279b297939e688aa8b7c928e53"
+    },
+    {
+      "id": "afterimage-original-05",
+      "title": "I Don’t Go With It",
+      "artist": "kaost032",
+      "kind": "original",
+      "file": "05_i_dont_go_with_it.mp3",
+      "source_drive_title": "I Don’t Go With It.mp3",
+      "size_bytes": 12296789,
+      "duration_ms": 307392,
+      "sha256": "2f4bf7b22a8bff37d2a698fd2ec050417b5c701ba18de41810188cdeb5191ad8"
+    },
+    {
+      "id": "afterimage-original-06",
+      "title": "Not You, Just Light",
+      "artist": "kaost032",
+      "kind": "original",
+      "file": "06_not_you_just_light.mp3",
+      "source_drive_title": "Not You, Just Light.mp3",
+      "size_bytes": 12999509,
+      "duration_ms": 324960,
+      "sha256": "ea603692cdd469c078e631547cce7903cc28e6c3dc02cd6a3a2f8db864a27714"
+    },
+    {
+      "id": "afterimage-original-07",
+      "title": "After the Last Color",
+      "artist": "kaost032",
+      "kind": "original",
+      "file": "07_after_the_last_color.mp3",
+      "source_drive_title": "After the Last Color.mp3",
+      "size_bytes": 16482389,
+      "duration_ms": 412032,
+      "sha256": "afcac9a799ef229e529418a2ebff412b730cc6f4904ebecca1c98552d3c5063a"
+    },
+    {
+      "id": "afterimage-rework-01",
+      "title": "Half-Second Lag — Instrumental Rework",
+      "artist": "kaost032",
+      "kind": "instrumental_rework",
+      "file": "08_half_second_lag_instrumental_rework.mp3",
+      "source_drive_title": "Half-Second Lag (Instrumental).mp3",
+      "size_bytes": 9191189,
+      "duration_ms": 229752,
+      "sha256": "51f729051a7340f27eb1439e7f9c0a8965a0f80ba3e7d478c29b395bb48aeae7"
+    },
+    {
+      "id": "afterimage-rework-02",
+      "title": "Not Quiet — Instrumental Rework",
+      "artist": "kaost032",
+      "kind": "instrumental_rework",
+      "file": "09_not_quiet_instrumental_rework.mp3",
+      "source_drive_title": "Not Quiet (Instrumental).mp3",
+      "size_bytes": 8598869,
+      "duration_ms": 214944,
+      "sha256": "cceee01b136fc694db9f66aa0f31a3d13c9ebfb55192c3b947f6f39fd146d7f2"
+    },
+    {
+      "id": "afterimage-rework-03",
+      "title": "Hear Myself Breathe — Instrumental Rework",
+      "artist": "kaost032",
+      "kind": "instrumental_rework",
+      "file": "10_hear_myself_breathe_instrumental_rework.mp3",
+      "source_drive_title": "Hear Myself Breathe (Instrumental).mp3",
+      "size_bytes": 8114069,
+      "duration_ms": 202824,
+      "sha256": "74b550490accdff740862a03fe76fd47ba80b6b7d1622471966eb90f4ce2915b"
+    },
+    {
+      "id": "afterimage-rework-04",
+      "title": "Quiet, Not Empty — Instrumental Rework",
+      "artist": "kaost032",
+      "kind": "instrumental_rework",
+      "file": "11_quiet_not_empty_instrumental_rework.mp3",
+      "source_drive_title": "Quiet, Not Empty (Instrumental).mp3",
+      "size_bytes": 7562069,
+      "duration_ms": 189024,
+      "sha256": "499623e193e381bb8c19c292379d34db66a1b10edfef99de00aa9747cb46c59e"
+    },
+    {
+      "id": "afterimage-rework-05",
+      "title": "I Don’t Go With It — Instrumental Rework",
+      "artist": "kaost032",
+      "kind": "instrumental_rework",
+      "file": "12_i_dont_go_with_it_instrumental_rework.mp3",
+      "source_drive_title": "I Don’t Go With It (Instrumental).mp3",
+      "size_bytes": 7802069,
+      "duration_ms": 195024,
+      "sha256": "5b5da696aae6c53169edda104910965d9e22c9c10cb17a3d1456517f51aabf93"
+    }
+  ]
+}

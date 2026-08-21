@@ -1,0 +1,776 @@
+{
+  "schema_version": 1,
+  "purpose": "Fail-closed integration map for humans and AI agents. Systems are authorities; required_connections are invariants, not suggestions.",
+  "systems": [
+    {
+      "id": "platform",
+      "label": "Platform + deterministic memory",
+      "files": [
+        "engine/src/platform.c"
+      ]
+    },
+    {
+      "id": "entity_store",
+      "label": "Dynamic entity stores + spatial index",
+      "files": [
+        "engine/src/entities.c"
+      ]
+    },
+    {
+      "id": "game_api",
+      "label": "Public C API + ABI",
+      "files": [
+        "engine/src/game.c",
+        "engine/include/odpar_game.h"
+      ]
+    },
+    {
+      "id": "items",
+      "label": "Items + capabilities",
+      "files": [
+        "engine/src/items.c"
+      ]
+    },
+    {
+      "id": "registry",
+      "label": "Cross-registry validation",
+      "files": [
+        "engine/src/content_registry.c"
+      ]
+    },
+    {
+      "id": "territory_policy",
+      "label": "Territorial access policy",
+      "files": [
+        "engine/src/territory_policy.c"
+      ]
+    },
+    {
+      "id": "surface",
+      "label": "Terrain + water + biome + weather authority",
+      "files": [
+        "engine/src/environment.c",
+        "engine/src/chunks.c"
+      ]
+    },
+    {
+      "id": "world_physics",
+      "label": "Shared terrain height + occupancy + airspace physics",
+      "files": [
+        "engine/src/world_physics.c"
+      ]
+    },
+    {
+      "id": "geology",
+      "label": "Subsurface strata + caves + ore-body authority",
+      "files": [
+        "engine/src/geology.c"
+      ]
+    },
+    {
+      "id": "survival",
+      "label": "Respiration + persistent environmental survival state",
+      "files": [
+        "engine/src/survival.c"
+      ]
+    },
+    {
+      "id": "nutrition",
+      "label": "Food + satiety + hydration + gradual damage",
+      "files": [
+        "engine/src/nutrition.c"
+      ]
+    },
+    {
+      "id": "fluids",
+      "label": "Fluid registry + typed containers",
+      "files": [
+        "engine/src/fluids.c"
+      ]
+    },
+    {
+      "id": "flora",
+      "label": "Flora lifecycle + fruit + seed + irrigation",
+      "files": [
+        "engine/src/ecology.c",
+        "engine/src/resources.c"
+      ]
+    },
+    {
+      "id": "fauna",
+      "label": "Fauna lifecycle + habitat + diet + reproduction",
+      "files": [
+        "engine/src/fauna.c"
+      ]
+    },
+    {
+      "id": "interactions",
+      "label": "Player/bot interaction dispatch",
+      "files": [
+        "engine/src/interactions.c"
+      ]
+    },
+    {
+      "id": "construction",
+      "label": "Lightweight territorial construction modules",
+      "files": [
+        "engine/src/construction.c"
+      ]
+    },
+    {
+      "id": "artifacts",
+      "label": "Stations + storage + death recovery",
+      "files": [
+        "engine/src/artifacts.c"
+      ]
+    },
+    {
+      "id": "crafting",
+      "label": "Recipes + repair + material progression",
+      "files": [
+        "engine/src/crafting.c"
+      ]
+    },
+    {
+      "id": "persistence",
+      "label": "Save/load + persistent world state",
+      "files": [
+        "engine/src/save.c"
+      ]
+    },
+    {
+      "id": "map",
+      "label": "Map queries + spatial world inspection",
+      "files": [
+        "engine/src/map.c"
+      ]
+    },
+    {
+      "id": "simulation",
+      "label": "Actors + bots + territory + combat + movement",
+      "files": [
+        "engine/src/sim.c"
+      ]
+    },
+    {
+      "id": "renderer",
+      "label": "Native 3D presentation",
+      "files": [
+        "engine/src/render.c"
+      ]
+    },
+    {
+      "id": "textures",
+      "label": "Texture/skin presentation store",
+      "files": [
+        "engine/src/texture_store.c",
+        "engine/src/glyphs.c"
+      ]
+    },
+    {
+      "id": "music",
+      "label": "Music reactive presentation",
+      "files": [
+        "engine/src/music_fx.c"
+      ]
+    },
+    {
+      "id": "flutter_host",
+      "label": "Flutter/Dart APK host",
+      "files": [
+        "app/flutter/lib/src/native/odg_bindings.dart",
+        "app/flutter/lib/src/engine/game_runtime.dart",
+        "app/flutter/CMakeLists.txt",
+        "app/flutter/lib/src/platform/android_host.dart",
+        "app/flutter/lib/src/ui/game_screen.dart",
+        "app/flutter/android/app/src/main/kotlin/com/odpar/territorial_domain/MainActivity.kt"
+      ]
+    },
+    {
+      "id": "wasm_host",
+      "label": "WASM preview host",
+      "files": [
+        "Makefile",
+        "app/web/index.html",
+        "tools/wasm_smoke.mjs"
+      ]
+    },
+    {
+      "id": "spine",
+      "label": "Project contract manifest",
+      "files": [
+        "PROJECT_SPINE.json"
+      ]
+    },
+    {
+      "id": "architecture_guards",
+      "label": "Architecture anti-coupling guards",
+      "files": [
+        "tools/check_content_coupling.py",
+        "tools/check_host_contract.py",
+        "tools/generate_system_graph.py"
+      ]
+    }
+  ],
+  "required_connections": [
+    {
+      "from": "registry",
+      "to": "items",
+      "why": "all registered content references valid item identities/capabilities",
+      "files": [
+        "engine/src/content_registry.c"
+      ],
+      "all": [
+        "odg_item_definition_internal"
+      ]
+    },
+    {
+      "from": "flora",
+      "to": "surface",
+      "why": "growth/irrigation use the same terrain moisture authority",
+      "files": [
+        "engine/src/ecology.c"
+      ],
+      "all": [
+        "odg_environment_surface_local"
+      ]
+    },
+    {
+      "from": "flora",
+      "to": "territory_policy",
+      "why": "wild flora is exploitable only with territorial access",
+      "files": [
+        "engine/src/ecology.c"
+      ],
+      "all": [
+        "odg_territory_allows_environment_action"
+      ]
+    },
+    {
+      "from": "fauna",
+      "to": "surface",
+      "why": "spawn/migration/foraging/drinking are constrained by the authoritative habitat surface",
+      "files": [
+        "engine/src/fauna.c"
+      ],
+      "all": [
+        "odg_environment_surface_local",
+        "odg_fauna_habitat_internal"
+      ]
+    },
+    {
+      "from": "fauna",
+      "to": "items",
+      "why": "diets and loot resolve item identities",
+      "files": [
+        "engine/src/fauna.c"
+      ],
+      "all": [
+        "odg_item_definition_internal"
+      ]
+    },
+    {
+      "from": "nutrition",
+      "to": "items",
+      "why": "food is item-driven, not flora-specific",
+      "files": [
+        "engine/src/nutrition.c"
+      ],
+      "all": [
+        "odg_food_definition_internal"
+      ]
+    },
+    {
+      "from": "interactions",
+      "to": "nutrition",
+      "why": "consume action uses generic food authority",
+      "files": [
+        "engine/src/interactions.c"
+      ],
+      "all": [
+        "odg_actor_consume_food_internal"
+      ]
+    },
+    {
+      "from": "interactions",
+      "to": "flora",
+      "why": "gather/plant/irrigate enter through interaction dispatcher",
+      "files": [
+        "engine/src/interactions.c"
+      ],
+      "all": [
+        "odg_ecology_gather_fruit",
+        "odg_ecology_plant_selected",
+        "odg_ecology_irrigate_nearest"
+      ]
+    },
+    {
+      "from": "interactions",
+      "to": "fauna",
+      "why": "hunting/taming interaction reaches fauna authority",
+      "files": [
+        "engine/src/interactions.c"
+      ],
+      "all": [
+        "odg_fauna_hunt",
+        "odg_fauna_build_hint"
+      ]
+    },
+    {
+      "from": "simulation",
+      "to": "surface",
+      "why": "movement uses terrain authority rather than renderer geometry",
+      "files": [
+        "engine/src/sim.c"
+      ],
+      "any": [
+        "odg_environment_surface_local",
+        "odg_terrain_height_fx"
+      ]
+    },
+    {
+      "from": "simulation",
+      "to": "nutrition",
+      "why": "actor survival ticks through generic nutrition",
+      "files": [
+        "engine/src/sim.c"
+      ],
+      "all": [
+        "odg_nutrition_tick"
+      ]
+    },
+    {
+      "from": "simulation",
+      "to": "fauna",
+      "why": "fauna lifecycle runs in authoritative world tick",
+      "files": [
+        "engine/src/sim.c"
+      ],
+      "all": [
+        "odg_fauna_tick"
+      ]
+    },
+    {
+      "from": "simulation",
+      "to": "flora",
+      "why": "flora lifecycle runs in authoritative world tick",
+      "files": [
+        "engine/src/sim.c"
+      ],
+      "all": [
+        "odg_ecology_tick"
+      ]
+    },
+    {
+      "from": "simulation",
+      "to": "artifacts",
+      "why": "death can create persistent recovery container",
+      "files": [
+        "engine/src/sim.c"
+      ],
+      "all": [
+        "odg_artifact_create_death_cache"
+      ]
+    },
+    {
+      "from": "renderer",
+      "to": "surface",
+      "why": "visual ground/water/orientation use same terrain height/normal",
+      "files": [
+        "engine/src/render.c"
+      ],
+      "all": [
+        "odg_world_height_milli64",
+        "odg_environment_normal_local_q15"
+      ]
+    },
+    {
+      "from": "persistence",
+      "to": "entity_store",
+      "why": "save/load restores dynamic stores transactionally",
+      "files": [
+        "engine/src/save.c"
+      ],
+      "all": [
+        "odg_entities_reserve_resources",
+        "odg_entities_reserve_artifacts"
+      ]
+    },
+    {
+      "from": "flutter_host",
+      "to": "fauna",
+      "why": "APK consumes fauna + nest snapshots and habitat definitions",
+      "files": [
+        "app/flutter/lib/src/native/odg_bindings.dart"
+      ],
+      "all": [
+        "odg_copy_fauna",
+        "odg_copy_fauna_nests",
+        "odg_fauna_habitat_get"
+      ]
+    },
+    {
+      "from": "flutter_host",
+      "to": "surface",
+      "why": "APK can inspect authoritative terrain/weather state",
+      "files": [
+        "app/flutter/lib/src/native/odg_bindings.dart"
+      ],
+      "all": [
+        "odg_world_surface_sample64",
+        "odg_weather_rain_permille"
+      ]
+    },
+    {
+      "from": "flutter_host",
+      "to": "nutrition",
+      "why": "APK exposes actor satiety/hydration without duplicating survival rules",
+      "files": [
+        "app/flutter/lib/src/native/odg_bindings.dart"
+      ],
+      "all": [
+        "odg_player_satiety_permille",
+        "odg_player_hydration_permille"
+      ]
+    },
+    {
+      "from": "flutter_host",
+      "to": "simulation",
+      "why": "APK sees non-lethal trail-break state",
+      "files": [
+        "app/flutter/lib/src/native/odg_bindings.dart"
+      ],
+      "all": [
+        "odg_player_trail_broken"
+      ]
+    },
+    {
+      "from": "wasm_host",
+      "to": "game_api",
+      "why": "preview export surface is derived from native ABI allowlist",
+      "files": [
+        "Makefile"
+      ],
+      "all": [
+        "WASM_EXPORTS",
+        "odpar_territorial_domain.exports.map"
+      ]
+    },
+    {
+      "from": "persistence",
+      "to": "fauna",
+      "why": "fauna and nests survive save/load rather than respawning as decoration",
+      "files": [
+        "engine/src/save.c"
+      ],
+      "all": [
+        "fauna must persist in save prefix",
+        "nests must persist in save prefix"
+      ]
+    },
+    {
+      "from": "persistence",
+      "to": "nutrition",
+      "why": "actor HP/satiety/trail recovery survive save/load",
+      "files": [
+        "engine/src/save.c"
+      ],
+      "all": [
+        "actors must persist in save prefix"
+      ]
+    },
+    {
+      "from": "persistence",
+      "to": "surface",
+      "why": "weather epoch/rain state survives save/load",
+      "files": [
+        "engine/src/save.c"
+      ],
+      "all": [
+        "weather must persist in save prefix"
+      ]
+    },
+    {
+      "from": "persistence",
+      "to": "territory_policy",
+      "why": "claimed territory survives save/load",
+      "files": [
+        "engine/src/save.c"
+      ],
+      "all": [
+        "territory must persist in save suffix"
+      ]
+    },
+    {
+      "from": "flutter_host",
+      "to": "persistence",
+      "why": "APK stores independent named world slots, verifies integrity, and asks the C save-schema authority whether a world is loadable; API/ABI are provenance only",
+      "files": [
+        "app/flutter/lib/src/platform/android_host.dart",
+        "app/flutter/lib/src/ui/game_screen.dart",
+        "app/flutter/android/app/src/main/kotlin/com/odpar/territorial_domain/MainActivity.kt",
+        "app/flutter/lib/src/native/odg_bindings.dart"
+      ],
+      "all": [
+        "listWorlds",
+        "saveWorldSlot",
+        "loadWorldSlot",
+        "blobSha256",
+        "structurallyLoadable",
+        "saveSchemaSupported"
+      ]
+    },
+    {
+      "from": "architecture_guards",
+      "to": "flora",
+      "why": "transversal gameplay cannot hardcode concrete flora species/items",
+      "files": [
+        "tools/check_content_coupling.py"
+      ],
+      "all": [
+        "CONTENT COUPLING OK"
+      ]
+    },
+    {
+      "from": "registry",
+      "to": "fluids",
+      "why": "fluid/container registries are cross-validated before world start",
+      "files": [
+        "engine/src/content_registry.c"
+      ],
+      "all": [
+        "odg_fluid_definition_count",
+        "odg_fluid_container_definition_count"
+      ]
+    },
+    {
+      "from": "nutrition",
+      "to": "fluids",
+      "why": "actor drinking resolves typed fluids/containers through the fluid registry",
+      "files": [
+        "engine/src/nutrition.c"
+      ],
+      "all": [
+        "odg_fluid_definition_internal",
+        "odg_fluid_container_definition_internal"
+      ]
+    },
+    {
+      "from": "interactions",
+      "to": "fluids",
+      "why": "fill/drink/irrigate dispatch uses typed fluid payloads and container capabilities",
+      "files": [
+        "engine/src/interactions.c"
+      ],
+      "all": [
+        "odg_fluid_container_definition_internal",
+        "odg_fluid_payload_make_internal"
+      ]
+    },
+    {
+      "from": "simulation",
+      "to": "fluids",
+      "why": "bot survival drinks real carried fluids and navigates to physical water sources",
+      "files": [
+        "engine/src/sim.c"
+      ],
+      "all": [
+        "odg_fluid_container_definition_internal",
+        "odg_actor_drink_selected_internal"
+      ]
+    },
+    {
+      "from": "flutter_host",
+      "to": "fluids",
+      "why": "APK consumes fluid and container definitions from the C authority",
+      "files": [
+        "app/flutter/lib/src/native/odg_bindings.dart"
+      ],
+      "all": [
+        "odg_fluid_definition_get",
+        "odg_fluid_container_definition_get"
+      ]
+    },
+    {
+      "from": "geology",
+      "to": "surface",
+      "why": "cave mouths and subsurface depth are anchored to the authoritative surface/water world",
+      "files": [
+        "engine/src/geology.c"
+      ],
+      "all": [
+        "odg_world_surface_sample64"
+      ]
+    },
+    {
+      "from": "flora",
+      "to": "geology",
+      "why": "surface mineral exposures are materialized only when backed by deterministic subsurface ore bodies",
+      "files": [
+        "engine/src/resources.c"
+      ],
+      "all": [
+        "odg_geology_surface_exposure_internal"
+      ]
+    },
+    {
+      "from": "survival",
+      "to": "surface",
+      "why": "respiration queries authoritative water depth instead of renderer state",
+      "files": [
+        "engine/src/survival.c"
+      ],
+      "all": [
+        "odg_environment_surface_local"
+      ]
+    },
+    {
+      "from": "simulation",
+      "to": "survival",
+      "why": "respiration and environmental damage advance in the authoritative world tick",
+      "files": [
+        "engine/src/sim.c"
+      ],
+      "all": [
+        "odg_survival_tick"
+      ]
+    },
+    {
+      "from": "persistence",
+      "to": "survival",
+      "why": "worldgen version and respiration state survive save/load through save schema migrations",
+      "files": [
+        "engine/src/save.c"
+      ],
+      "all": [
+        "g_odg_persistent_runtime"
+      ]
+    },
+    {
+      "from": "flutter_host",
+      "to": "survival",
+      "why": "APK reads oxygen/worldgen state from C without duplicating survival rules",
+      "files": [
+        "app/flutter/lib/src/native/odg_bindings.dart"
+      ],
+      "all": [
+        "odg_player_oxygen_permille",
+        "odg_worldgen_version"
+      ]
+    },
+    {
+      "from": "flutter_host",
+      "to": "geology",
+      "why": "APK can inspect authoritative cave/ore strata through the C API",
+      "files": [
+        "app/flutter/lib/src/native/odg_bindings.dart"
+      ],
+      "all": [
+        "odg_world_geology_material64",
+        "odg_world_cave_openness_permille64"
+      ]
+    },
+    {
+      "from": "registry",
+      "to": "construction",
+      "why": "construction content/profile consistency is validated at registry initialization",
+      "files": [
+        "engine/src/content_registry.c"
+      ],
+      "all": [
+        "odg_construction_profiles_validate_internal"
+      ]
+    },
+    {
+      "from": "construction",
+      "to": "territory_policy",
+      "why": "placement and dismantling rights derive from territorial control",
+      "files": [
+        "engine/src/construction.c"
+      ],
+      "all": [
+        "odg_chunk_owner_at_global_cell"
+      ]
+    },
+    {
+      "from": "construction",
+      "to": "surface",
+      "why": "construction placement rejects water/steep invalid surfaces",
+      "files": [
+        "engine/src/construction.c"
+      ],
+      "all": [
+        "odg_environment_surface_local"
+      ]
+    },
+    {
+      "from": "interactions",
+      "to": "construction",
+      "why": "universal interaction dispatch places and dismantles lightweight construction",
+      "files": [
+        "engine/src/interactions.c"
+      ],
+      "all": [
+        "odg_construction_build_hint_internal",
+        "odg_construction_execute_hold_internal"
+      ]
+    },
+    {
+      "from": "world_physics",
+      "to": "construction",
+      "why": "shared world occupancy treats lightweight construction as physical geometry",
+      "files": [
+        "engine/src/world_physics.c"
+      ],
+      "all": [
+        "odg_construction_position_blocked_internal"
+      ]
+    },
+    {
+      "from": "persistence",
+      "to": "construction",
+      "why": "save20 persists compact construction topology and durability while explicit migrations preserve legacy artifact-backed blocks",
+      "files": [
+        "engine/src/save.c"
+      ],
+      "all": [
+        "odg_construction_import_legacy_artifact_internal",
+        "odg_construction_max_health_internal"
+      ]
+    },
+    {
+      "from": "renderer",
+      "to": "construction",
+      "why": "native renderer draws authoritative compact construction state",
+      "files": [
+        "engine/src/render.c"
+      ],
+      "all": [
+        "render_construction_nodes"
+      ]
+    },
+    {
+      "from": "world_physics",
+      "to": "surface",
+      "why": "shared terrain physics interpolates deterministic global world height",
+      "files": [
+        "engine/src/world_physics.c"
+      ],
+      "all": [
+        "odg_world_height_milli64"
+      ]
+    },
+    {
+      "from": "simulation",
+      "to": "world_physics",
+      "why": "actor movement and camera consume shared physical occupancy geometry",
+      "files": [
+        "engine/src/sim.c"
+      ],
+      "all": [
+        "odg_position_clear_internal",
+        "odg_world_circle_aabb_overlap_internal"
+      ]
+    }
+  ]
+}

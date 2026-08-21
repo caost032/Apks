@@ -1,0 +1,2713 @@
+{
+  "schema_version": 1,
+  "manifest_schema": 1,
+  "summary": {
+    "systems": 28,
+    "c_modules": 30,
+    "functions": 958,
+    "cross_module_calls": 553,
+    "public_c_symbols": 149,
+    "dart_lookups": 88,
+    "required_connections": 48,
+    "gaps": 0
+  },
+  "systems": [
+    {
+      "id": "platform",
+      "label": "Platform + deterministic memory",
+      "files": [
+        "engine/src/platform.c"
+      ]
+    },
+    {
+      "id": "entity_store",
+      "label": "Dynamic entity stores + spatial index",
+      "files": [
+        "engine/src/entities.c"
+      ]
+    },
+    {
+      "id": "game_api",
+      "label": "Public C API + ABI",
+      "files": [
+        "engine/src/game.c",
+        "engine/include/odpar_game.h"
+      ]
+    },
+    {
+      "id": "items",
+      "label": "Items + capabilities",
+      "files": [
+        "engine/src/items.c"
+      ]
+    },
+    {
+      "id": "registry",
+      "label": "Cross-registry validation",
+      "files": [
+        "engine/src/content_registry.c"
+      ]
+    },
+    {
+      "id": "territory_policy",
+      "label": "Territorial access policy",
+      "files": [
+        "engine/src/territory_policy.c"
+      ]
+    },
+    {
+      "id": "surface",
+      "label": "Terrain + water + biome + weather authority",
+      "files": [
+        "engine/src/environment.c",
+        "engine/src/chunks.c"
+      ]
+    },
+    {
+      "id": "world_physics",
+      "label": "Shared terrain height + occupancy + airspace physics",
+      "files": [
+        "engine/src/world_physics.c"
+      ]
+    },
+    {
+      "id": "geology",
+      "label": "Subsurface strata + caves + ore-body authority",
+      "files": [
+        "engine/src/geology.c"
+      ]
+    },
+    {
+      "id": "survival",
+      "label": "Respiration + persistent environmental survival state",
+      "files": [
+        "engine/src/survival.c"
+      ]
+    },
+    {
+      "id": "nutrition",
+      "label": "Food + satiety + hydration + gradual damage",
+      "files": [
+        "engine/src/nutrition.c"
+      ]
+    },
+    {
+      "id": "fluids",
+      "label": "Fluid registry + typed containers",
+      "files": [
+        "engine/src/fluids.c"
+      ]
+    },
+    {
+      "id": "flora",
+      "label": "Flora lifecycle + fruit + seed + irrigation",
+      "files": [
+        "engine/src/ecology.c",
+        "engine/src/resources.c"
+      ]
+    },
+    {
+      "id": "fauna",
+      "label": "Fauna lifecycle + habitat + diet + reproduction",
+      "files": [
+        "engine/src/fauna.c"
+      ]
+    },
+    {
+      "id": "interactions",
+      "label": "Player/bot interaction dispatch",
+      "files": [
+        "engine/src/interactions.c"
+      ]
+    },
+    {
+      "id": "construction",
+      "label": "Lightweight territorial construction modules",
+      "files": [
+        "engine/src/construction.c"
+      ]
+    },
+    {
+      "id": "artifacts",
+      "label": "Stations + storage + death recovery",
+      "files": [
+        "engine/src/artifacts.c"
+      ]
+    },
+    {
+      "id": "crafting",
+      "label": "Recipes + repair + material progression",
+      "files": [
+        "engine/src/crafting.c"
+      ]
+    },
+    {
+      "id": "persistence",
+      "label": "Save/load + persistent world state",
+      "files": [
+        "engine/src/save.c"
+      ]
+    },
+    {
+      "id": "map",
+      "label": "Map queries + spatial world inspection",
+      "files": [
+        "engine/src/map.c"
+      ]
+    },
+    {
+      "id": "simulation",
+      "label": "Actors + bots + territory + combat + movement",
+      "files": [
+        "engine/src/sim.c"
+      ]
+    },
+    {
+      "id": "renderer",
+      "label": "Native 3D presentation",
+      "files": [
+        "engine/src/render.c"
+      ]
+    },
+    {
+      "id": "textures",
+      "label": "Texture/skin presentation store",
+      "files": [
+        "engine/src/texture_store.c",
+        "engine/src/glyphs.c"
+      ]
+    },
+    {
+      "id": "music",
+      "label": "Music reactive presentation",
+      "files": [
+        "engine/src/music_fx.c"
+      ]
+    },
+    {
+      "id": "flutter_host",
+      "label": "Flutter/Dart APK host",
+      "files": [
+        "app/flutter/lib/src/native/odg_bindings.dart",
+        "app/flutter/lib/src/engine/game_runtime.dart",
+        "app/flutter/CMakeLists.txt",
+        "app/flutter/lib/src/platform/android_host.dart",
+        "app/flutter/lib/src/ui/game_screen.dart",
+        "app/flutter/android/app/src/main/kotlin/com/odpar/territorial_domain/MainActivity.kt"
+      ]
+    },
+    {
+      "id": "wasm_host",
+      "label": "WASM preview host",
+      "files": [
+        "Makefile",
+        "app/web/index.html",
+        "tools/wasm_smoke.mjs"
+      ]
+    },
+    {
+      "id": "spine",
+      "label": "Project contract manifest",
+      "files": [
+        "PROJECT_SPINE.json"
+      ]
+    },
+    {
+      "id": "architecture_guards",
+      "label": "Architecture anti-coupling guards",
+      "files": [
+        "tools/check_content_coupling.py",
+        "tools/check_host_contract.py",
+        "tools/generate_system_graph.py"
+      ]
+    }
+  ],
+  "required_connections": [
+    {
+      "from": "registry",
+      "to": "items",
+      "why": "all registered content references valid item identities/capabilities",
+      "files": [
+        "engine/src/content_registry.c"
+      ],
+      "all": [
+        "odg_item_definition_internal"
+      ]
+    },
+    {
+      "from": "flora",
+      "to": "surface",
+      "why": "growth/irrigation use the same terrain moisture authority",
+      "files": [
+        "engine/src/ecology.c"
+      ],
+      "all": [
+        "odg_environment_surface_local"
+      ]
+    },
+    {
+      "from": "flora",
+      "to": "territory_policy",
+      "why": "wild flora is exploitable only with territorial access",
+      "files": [
+        "engine/src/ecology.c"
+      ],
+      "all": [
+        "odg_territory_allows_environment_action"
+      ]
+    },
+    {
+      "from": "fauna",
+      "to": "surface",
+      "why": "spawn/migration/foraging/drinking are constrained by the authoritative habitat surface",
+      "files": [
+        "engine/src/fauna.c"
+      ],
+      "all": [
+        "odg_environment_surface_local",
+        "odg_fauna_habitat_internal"
+      ]
+    },
+    {
+      "from": "fauna",
+      "to": "items",
+      "why": "diets and loot resolve item identities",
+      "files": [
+        "engine/src/fauna.c"
+      ],
+      "all": [
+        "odg_item_definition_internal"
+      ]
+    },
+    {
+      "from": "nutrition",
+      "to": "items",
+      "why": "food is item-driven, not flora-specific",
+      "files": [
+        "engine/src/nutrition.c"
+      ],
+      "all": [
+        "odg_food_definition_internal"
+      ]
+    },
+    {
+      "from": "interactions",
+      "to": "nutrition",
+      "why": "consume action uses generic food authority",
+      "files": [
+        "engine/src/interactions.c"
+      ],
+      "all": [
+        "odg_actor_consume_food_internal"
+      ]
+    },
+    {
+      "from": "interactions",
+      "to": "flora",
+      "why": "gather/plant/irrigate enter through interaction dispatcher",
+      "files": [
+        "engine/src/interactions.c"
+      ],
+      "all": [
+        "odg_ecology_gather_fruit",
+        "odg_ecology_plant_selected",
+        "odg_ecology_irrigate_nearest"
+      ]
+    },
+    {
+      "from": "interactions",
+      "to": "fauna",
+      "why": "hunting/taming interaction reaches fauna authority",
+      "files": [
+        "engine/src/interactions.c"
+      ],
+      "all": [
+        "odg_fauna_hunt",
+        "odg_fauna_build_hint"
+      ]
+    },
+    {
+      "from": "simulation",
+      "to": "surface",
+      "why": "movement uses terrain authority rather than renderer geometry",
+      "files": [
+        "engine/src/sim.c"
+      ],
+      "any": [
+        "odg_environment_surface_local",
+        "odg_terrain_height_fx"
+      ]
+    },
+    {
+      "from": "simulation",
+      "to": "nutrition",
+      "why": "actor survival ticks through generic nutrition",
+      "files": [
+        "engine/src/sim.c"
+      ],
+      "all": [
+        "odg_nutrition_tick"
+      ]
+    },
+    {
+      "from": "simulation",
+      "to": "fauna",
+      "why": "fauna lifecycle runs in authoritative world tick",
+      "files": [
+        "engine/src/sim.c"
+      ],
+      "all": [
+        "odg_fauna_tick"
+      ]
+    },
+    {
+      "from": "simulation",
+      "to": "flora",
+      "why": "flora lifecycle runs in authoritative world tick",
+      "files": [
+        "engine/src/sim.c"
+      ],
+      "all": [
+        "odg_ecology_tick"
+      ]
+    },
+    {
+      "from": "simulation",
+      "to": "artifacts",
+      "why": "death can create persistent recovery container",
+      "files": [
+        "engine/src/sim.c"
+      ],
+      "all": [
+        "odg_artifact_create_death_cache"
+      ]
+    },
+    {
+      "from": "renderer",
+      "to": "surface",
+      "why": "visual ground/water/orientation use same terrain height/normal",
+      "files": [
+        "engine/src/render.c"
+      ],
+      "all": [
+        "odg_world_height_milli64",
+        "odg_environment_normal_local_q15"
+      ]
+    },
+    {
+      "from": "persistence",
+      "to": "entity_store",
+      "why": "save/load restores dynamic stores transactionally",
+      "files": [
+        "engine/src/save.c"
+      ],
+      "all": [
+        "odg_entities_reserve_resources",
+        "odg_entities_reserve_artifacts"
+      ]
+    },
+    {
+      "from": "flutter_host",
+      "to": "fauna",
+      "why": "APK consumes fauna + nest snapshots and habitat definitions",
+      "files": [
+        "app/flutter/lib/src/native/odg_bindings.dart"
+      ],
+      "all": [
+        "odg_copy_fauna",
+        "odg_copy_fauna_nests",
+        "odg_fauna_habitat_get"
+      ]
+    },
+    {
+      "from": "flutter_host",
+      "to": "surface",
+      "why": "APK can inspect authoritative terrain/weather state",
+      "files": [
+        "app/flutter/lib/src/native/odg_bindings.dart"
+      ],
+      "all": [
+        "odg_world_surface_sample64",
+        "odg_weather_rain_permille"
+      ]
+    },
+    {
+      "from": "flutter_host",
+      "to": "nutrition",
+      "why": "APK exposes actor satiety/hydration without duplicating survival rules",
+      "files": [
+        "app/flutter/lib/src/native/odg_bindings.dart"
+      ],
+      "all": [
+        "odg_player_satiety_permille",
+        "odg_player_hydration_permille"
+      ]
+    },
+    {
+      "from": "flutter_host",
+      "to": "simulation",
+      "why": "APK sees non-lethal trail-break state",
+      "files": [
+        "app/flutter/lib/src/native/odg_bindings.dart"
+      ],
+      "all": [
+        "odg_player_trail_broken"
+      ]
+    },
+    {
+      "from": "wasm_host",
+      "to": "game_api",
+      "why": "preview export surface is derived from native ABI allowlist",
+      "files": [
+        "Makefile"
+      ],
+      "all": [
+        "WASM_EXPORTS",
+        "odpar_territorial_domain.exports.map"
+      ]
+    },
+    {
+      "from": "persistence",
+      "to": "fauna",
+      "why": "fauna and nests survive save/load rather than respawning as decoration",
+      "files": [
+        "engine/src/save.c"
+      ],
+      "all": [
+        "fauna must persist in save prefix",
+        "nests must persist in save prefix"
+      ]
+    },
+    {
+      "from": "persistence",
+      "to": "nutrition",
+      "why": "actor HP/satiety/trail recovery survive save/load",
+      "files": [
+        "engine/src/save.c"
+      ],
+      "all": [
+        "actors must persist in save prefix"
+      ]
+    },
+    {
+      "from": "persistence",
+      "to": "surface",
+      "why": "weather epoch/rain state survives save/load",
+      "files": [
+        "engine/src/save.c"
+      ],
+      "all": [
+        "weather must persist in save prefix"
+      ]
+    },
+    {
+      "from": "persistence",
+      "to": "territory_policy",
+      "why": "claimed territory survives save/load",
+      "files": [
+        "engine/src/save.c"
+      ],
+      "all": [
+        "territory must persist in save suffix"
+      ]
+    },
+    {
+      "from": "flutter_host",
+      "to": "persistence",
+      "why": "APK stores independent named world slots, verifies integrity, and asks the C save-schema authority whether a world is loadable; API/ABI are provenance only",
+      "files": [
+        "app/flutter/lib/src/platform/android_host.dart",
+        "app/flutter/lib/src/ui/game_screen.dart",
+        "app/flutter/android/app/src/main/kotlin/com/odpar/territorial_domain/MainActivity.kt",
+        "app/flutter/lib/src/native/odg_bindings.dart"
+      ],
+      "all": [
+        "listWorlds",
+        "saveWorldSlot",
+        "loadWorldSlot",
+        "blobSha256",
+        "structurallyLoadable",
+        "saveSchemaSupported"
+      ]
+    },
+    {
+      "from": "architecture_guards",
+      "to": "flora",
+      "why": "transversal gameplay cannot hardcode concrete flora species/items",
+      "files": [
+        "tools/check_content_coupling.py"
+      ],
+      "all": [
+        "CONTENT COUPLING OK"
+      ]
+    },
+    {
+      "from": "registry",
+      "to": "fluids",
+      "why": "fluid/container registries are cross-validated before world start",
+      "files": [
+        "engine/src/content_registry.c"
+      ],
+      "all": [
+        "odg_fluid_definition_count",
+        "odg_fluid_container_definition_count"
+      ]
+    },
+    {
+      "from": "nutrition",
+      "to": "fluids",
+      "why": "actor drinking resolves typed fluids/containers through the fluid registry",
+      "files": [
+        "engine/src/nutrition.c"
+      ],
+      "all": [
+        "odg_fluid_definition_internal",
+        "odg_fluid_container_definition_internal"
+      ]
+    },
+    {
+      "from": "interactions",
+      "to": "fluids",
+      "why": "fill/drink/irrigate dispatch uses typed fluid payloads and container capabilities",
+      "files": [
+        "engine/src/interactions.c"
+      ],
+      "all": [
+        "odg_fluid_container_definition_internal",
+        "odg_fluid_payload_make_internal"
+      ]
+    },
+    {
+      "from": "simulation",
+      "to": "fluids",
+      "why": "bot survival drinks real carried fluids and navigates to physical water sources",
+      "files": [
+        "engine/src/sim.c"
+      ],
+      "all": [
+        "odg_fluid_container_definition_internal",
+        "odg_actor_drink_selected_internal"
+      ]
+    },
+    {
+      "from": "flutter_host",
+      "to": "fluids",
+      "why": "APK consumes fluid and container definitions from the C authority",
+      "files": [
+        "app/flutter/lib/src/native/odg_bindings.dart"
+      ],
+      "all": [
+        "odg_fluid_definition_get",
+        "odg_fluid_container_definition_get"
+      ]
+    },
+    {
+      "from": "geology",
+      "to": "surface",
+      "why": "cave mouths and subsurface depth are anchored to the authoritative surface/water world",
+      "files": [
+        "engine/src/geology.c"
+      ],
+      "all": [
+        "odg_world_surface_sample64"
+      ]
+    },
+    {
+      "from": "flora",
+      "to": "geology",
+      "why": "surface mineral exposures are materialized only when backed by deterministic subsurface ore bodies",
+      "files": [
+        "engine/src/resources.c"
+      ],
+      "all": [
+        "odg_geology_surface_exposure_internal"
+      ]
+    },
+    {
+      "from": "survival",
+      "to": "surface",
+      "why": "respiration queries authoritative water depth instead of renderer state",
+      "files": [
+        "engine/src/survival.c"
+      ],
+      "all": [
+        "odg_environment_surface_local"
+      ]
+    },
+    {
+      "from": "simulation",
+      "to": "survival",
+      "why": "respiration and environmental damage advance in the authoritative world tick",
+      "files": [
+        "engine/src/sim.c"
+      ],
+      "all": [
+        "odg_survival_tick"
+      ]
+    },
+    {
+      "from": "persistence",
+      "to": "survival",
+      "why": "worldgen version and respiration state survive save/load through save schema migrations",
+      "files": [
+        "engine/src/save.c"
+      ],
+      "all": [
+        "g_odg_persistent_runtime"
+      ]
+    },
+    {
+      "from": "flutter_host",
+      "to": "survival",
+      "why": "APK reads oxygen/worldgen state from C without duplicating survival rules",
+      "files": [
+        "app/flutter/lib/src/native/odg_bindings.dart"
+      ],
+      "all": [
+        "odg_player_oxygen_permille",
+        "odg_worldgen_version"
+      ]
+    },
+    {
+      "from": "flutter_host",
+      "to": "geology",
+      "why": "APK can inspect authoritative cave/ore strata through the C API",
+      "files": [
+        "app/flutter/lib/src/native/odg_bindings.dart"
+      ],
+      "all": [
+        "odg_world_geology_material64",
+        "odg_world_cave_openness_permille64"
+      ]
+    },
+    {
+      "from": "registry",
+      "to": "construction",
+      "why": "construction content/profile consistency is validated at registry initialization",
+      "files": [
+        "engine/src/content_registry.c"
+      ],
+      "all": [
+        "odg_construction_profiles_validate_internal"
+      ]
+    },
+    {
+      "from": "construction",
+      "to": "territory_policy",
+      "why": "placement and dismantling rights derive from territorial control",
+      "files": [
+        "engine/src/construction.c"
+      ],
+      "all": [
+        "odg_chunk_owner_at_global_cell"
+      ]
+    },
+    {
+      "from": "construction",
+      "to": "surface",
+      "why": "construction placement rejects water/steep invalid surfaces",
+      "files": [
+        "engine/src/construction.c"
+      ],
+      "all": [
+        "odg_environment_surface_local"
+      ]
+    },
+    {
+      "from": "interactions",
+      "to": "construction",
+      "why": "universal interaction dispatch places and dismantles lightweight construction",
+      "files": [
+        "engine/src/interactions.c"
+      ],
+      "all": [
+        "odg_construction_build_hint_internal",
+        "odg_construction_execute_hold_internal"
+      ]
+    },
+    {
+      "from": "world_physics",
+      "to": "construction",
+      "why": "shared world occupancy treats lightweight construction as physical geometry",
+      "files": [
+        "engine/src/world_physics.c"
+      ],
+      "all": [
+        "odg_construction_position_blocked_internal"
+      ]
+    },
+    {
+      "from": "persistence",
+      "to": "construction",
+      "why": "save20 persists compact construction topology and durability while explicit migrations preserve legacy artifact-backed blocks",
+      "files": [
+        "engine/src/save.c"
+      ],
+      "all": [
+        "odg_construction_import_legacy_artifact_internal",
+        "odg_construction_max_health_internal"
+      ]
+    },
+    {
+      "from": "renderer",
+      "to": "construction",
+      "why": "native renderer draws authoritative compact construction state",
+      "files": [
+        "engine/src/render.c"
+      ],
+      "all": [
+        "render_construction_nodes"
+      ]
+    },
+    {
+      "from": "world_physics",
+      "to": "surface",
+      "why": "shared terrain physics interpolates deterministic global world height",
+      "files": [
+        "engine/src/world_physics.c"
+      ],
+      "all": [
+        "odg_world_height_milli64"
+      ]
+    },
+    {
+      "from": "simulation",
+      "to": "world_physics",
+      "why": "actor movement and camera consume shared physical occupancy geometry",
+      "files": [
+        "engine/src/sim.c"
+      ],
+      "all": [
+        "odg_position_clear_internal",
+        "odg_world_circle_aabb_overlap_internal"
+      ]
+    }
+  ],
+  "module_edges": [
+    {
+      "from": "engine/src/android_bridge.c",
+      "to": "engine/src/music_fx.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/android_bridge.c",
+      "to": "engine/src/platform.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/artifacts.c",
+      "to": "engine/src/chunks.c",
+      "call_count": 5
+    },
+    {
+      "from": "engine/src/artifacts.c",
+      "to": "engine/src/entities.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/artifacts.c",
+      "to": "engine/src/environment.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/artifacts.c",
+      "to": "engine/src/game.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/artifacts.c",
+      "to": "engine/src/items.c",
+      "call_count": 15
+    },
+    {
+      "from": "engine/src/artifacts.c",
+      "to": "engine/src/platform.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/artifacts.c",
+      "to": "engine/src/sim.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/artifacts.c",
+      "to": "engine/src/territory_policy.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/artifacts.c",
+      "to": "engine/src/world_physics.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/chunks.c",
+      "to": "engine/src/entities.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/chunks.c",
+      "to": "engine/src/fauna.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/chunks.c",
+      "to": "engine/src/interactions.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/chunks.c",
+      "to": "engine/src/platform.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/chunks.c",
+      "to": "engine/src/resources.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/chunks.c",
+      "to": "engine/src/sim.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/chunks.c",
+      "to": "engine/src/survival.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/chunks.c",
+      "to": "engine/src/world_physics.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/construction.c",
+      "to": "engine/src/chunks.c",
+      "call_count": 7
+    },
+    {
+      "from": "engine/src/construction.c",
+      "to": "engine/src/crafting.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/construction.c",
+      "to": "engine/src/entities.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/construction.c",
+      "to": "engine/src/environment.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/construction.c",
+      "to": "engine/src/items.c",
+      "call_count": 8
+    },
+    {
+      "from": "engine/src/construction.c",
+      "to": "engine/src/platform.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/construction.c",
+      "to": "engine/src/sim.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/construction.c",
+      "to": "engine/src/world_physics.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/content_registry.c",
+      "to": "engine/src/artifacts.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/content_registry.c",
+      "to": "engine/src/construction.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/content_registry.c",
+      "to": "engine/src/crafting.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/content_registry.c",
+      "to": "engine/src/ecology.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/content_registry.c",
+      "to": "engine/src/fauna.c",
+      "call_count": 14
+    },
+    {
+      "from": "engine/src/content_registry.c",
+      "to": "engine/src/fluids.c",
+      "call_count": 4
+    },
+    {
+      "from": "engine/src/content_registry.c",
+      "to": "engine/src/interactions.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/content_registry.c",
+      "to": "engine/src/items.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/content_registry.c",
+      "to": "engine/src/nutrition.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/content_registry.c",
+      "to": "engine/src/resources.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/crafting.c",
+      "to": "engine/src/artifacts.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/crafting.c",
+      "to": "engine/src/items.c",
+      "call_count": 9
+    },
+    {
+      "from": "engine/src/crafting.c",
+      "to": "engine/src/platform.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/crafting.c",
+      "to": "engine/src/sim.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/ecology.c",
+      "to": "engine/src/chunks.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/ecology.c",
+      "to": "engine/src/entities.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/ecology.c",
+      "to": "engine/src/environment.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/ecology.c",
+      "to": "engine/src/items.c",
+      "call_count": 5
+    },
+    {
+      "from": "engine/src/ecology.c",
+      "to": "engine/src/platform.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/ecology.c",
+      "to": "engine/src/resources.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/ecology.c",
+      "to": "engine/src/territory_policy.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/ecology.c",
+      "to": "engine/src/world_physics.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/entities.c",
+      "to": "engine/src/chunks.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/entities.c",
+      "to": "engine/src/construction.c",
+      "call_count": 4
+    },
+    {
+      "from": "engine/src/entities.c",
+      "to": "engine/src/platform.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/environment.c",
+      "to": "engine/src/chunks.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/environment.c",
+      "to": "engine/src/game.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/environment.c",
+      "to": "engine/src/platform.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/environment.c",
+      "to": "engine/src/world_physics.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/fauna.c",
+      "to": "engine/src/artifacts.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/fauna.c",
+      "to": "engine/src/chunks.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/fauna.c",
+      "to": "engine/src/ecology.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/fauna.c",
+      "to": "engine/src/environment.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/fauna.c",
+      "to": "engine/src/game.c",
+      "call_count": 4
+    },
+    {
+      "from": "engine/src/fauna.c",
+      "to": "engine/src/items.c",
+      "call_count": 8
+    },
+    {
+      "from": "engine/src/fauna.c",
+      "to": "engine/src/platform.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/fauna.c",
+      "to": "engine/src/resources.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/fauna.c",
+      "to": "engine/src/sim.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/fauna.c",
+      "to": "engine/src/survival.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/fauna.c",
+      "to": "engine/src/territory_policy.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/fauna.c",
+      "to": "engine/src/world_physics.c",
+      "call_count": 4
+    },
+    {
+      "from": "engine/src/fauna.c",
+      "to": "engine/vendor/odm_rng.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/game.c",
+      "to": "engine/src/chunks.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/game.c",
+      "to": "engine/src/content_registry.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/game.c",
+      "to": "engine/src/entities.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/game.c",
+      "to": "engine/src/items.c",
+      "call_count": 4
+    },
+    {
+      "from": "engine/src/game.c",
+      "to": "engine/src/platform.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/game.c",
+      "to": "engine/src/render.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/game.c",
+      "to": "engine/src/sim.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/game.c",
+      "to": "engine/vendor/odm_rng.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/geology.c",
+      "to": "engine/src/environment.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/interactions.c",
+      "to": "engine/src/artifacts.c",
+      "call_count": 7
+    },
+    {
+      "from": "engine/src/interactions.c",
+      "to": "engine/src/chunks.c",
+      "call_count": 7
+    },
+    {
+      "from": "engine/src/interactions.c",
+      "to": "engine/src/construction.c",
+      "call_count": 6
+    },
+    {
+      "from": "engine/src/interactions.c",
+      "to": "engine/src/crafting.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/interactions.c",
+      "to": "engine/src/ecology.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/interactions.c",
+      "to": "engine/src/entities.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/interactions.c",
+      "to": "engine/src/environment.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/interactions.c",
+      "to": "engine/src/fauna.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/interactions.c",
+      "to": "engine/src/fluids.c",
+      "call_count": 5
+    },
+    {
+      "from": "engine/src/interactions.c",
+      "to": "engine/src/items.c",
+      "call_count": 16
+    },
+    {
+      "from": "engine/src/interactions.c",
+      "to": "engine/src/nutrition.c",
+      "call_count": 4
+    },
+    {
+      "from": "engine/src/interactions.c",
+      "to": "engine/src/platform.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/interactions.c",
+      "to": "engine/src/resources.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/interactions.c",
+      "to": "engine/src/sim.c",
+      "call_count": 5
+    },
+    {
+      "from": "engine/src/interactions.c",
+      "to": "engine/src/territory_policy.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/items.c",
+      "to": "engine/src/chunks.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/items.c",
+      "to": "engine/src/crafting.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/items.c",
+      "to": "engine/src/entities.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/items.c",
+      "to": "engine/src/nutrition.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/items.c",
+      "to": "engine/src/platform.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/map.c",
+      "to": "engine/src/chunks.c",
+      "call_count": 6
+    },
+    {
+      "from": "engine/src/map.c",
+      "to": "engine/src/entities.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/music_fx.c",
+      "to": "engine/src/platform.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/nutrition.c",
+      "to": "engine/src/ecology.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/nutrition.c",
+      "to": "engine/src/fluids.c",
+      "call_count": 5
+    },
+    {
+      "from": "engine/src/nutrition.c",
+      "to": "engine/src/game.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/nutrition.c",
+      "to": "engine/src/items.c",
+      "call_count": 8
+    },
+    {
+      "from": "engine/src/nutrition.c",
+      "to": "engine/src/platform.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/nutrition.c",
+      "to": "engine/src/sim.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/render.c",
+      "to": "engine/src/artifacts.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/render.c",
+      "to": "engine/src/chunks.c",
+      "call_count": 6
+    },
+    {
+      "from": "engine/src/render.c",
+      "to": "engine/src/construction.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/render.c",
+      "to": "engine/src/entities.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/render.c",
+      "to": "engine/src/environment.c",
+      "call_count": 4
+    },
+    {
+      "from": "engine/src/render.c",
+      "to": "engine/src/fauna.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/render.c",
+      "to": "engine/src/game.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/render.c",
+      "to": "engine/src/glyphs.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/render.c",
+      "to": "engine/src/items.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/render.c",
+      "to": "engine/src/music_fx.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/render.c",
+      "to": "engine/src/platform.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/render.c",
+      "to": "engine/src/resources.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/render.c",
+      "to": "engine/src/sim.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/render.c",
+      "to": "engine/src/texture_store.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/resources.c",
+      "to": "engine/src/chunks.c",
+      "call_count": 14
+    },
+    {
+      "from": "engine/src/resources.c",
+      "to": "engine/src/ecology.c",
+      "call_count": 6
+    },
+    {
+      "from": "engine/src/resources.c",
+      "to": "engine/src/entities.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/resources.c",
+      "to": "engine/src/environment.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/resources.c",
+      "to": "engine/src/geology.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/resources.c",
+      "to": "engine/src/items.c",
+      "call_count": 7
+    },
+    {
+      "from": "engine/src/resources.c",
+      "to": "engine/src/platform.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/resources.c",
+      "to": "engine/src/sim.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/resources.c",
+      "to": "engine/src/survival.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/resources.c",
+      "to": "engine/src/territory_policy.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/resources.c",
+      "to": "engine/src/world_physics.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/save.c",
+      "to": "engine/src/artifacts.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/save.c",
+      "to": "engine/src/chunks.c",
+      "call_count": 6
+    },
+    {
+      "from": "engine/src/save.c",
+      "to": "engine/src/construction.c",
+      "call_count": 5
+    },
+    {
+      "from": "engine/src/save.c",
+      "to": "engine/src/ecology.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/save.c",
+      "to": "engine/src/entities.c",
+      "call_count": 7
+    },
+    {
+      "from": "engine/src/save.c",
+      "to": "engine/src/fauna.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/save.c",
+      "to": "engine/src/fluids.c",
+      "call_count": 4
+    },
+    {
+      "from": "engine/src/save.c",
+      "to": "engine/src/game.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/save.c",
+      "to": "engine/src/interactions.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/save.c",
+      "to": "engine/src/items.c",
+      "call_count": 7
+    },
+    {
+      "from": "engine/src/save.c",
+      "to": "engine/src/platform.c",
+      "call_count": 4
+    },
+    {
+      "from": "engine/src/save.c",
+      "to": "engine/src/resources.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/save.c",
+      "to": "engine/src/sim.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/save.c",
+      "to": "engine/src/survival.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/sim.c",
+      "to": "engine/src/artifacts.c",
+      "call_count": 12
+    },
+    {
+      "from": "engine/src/sim.c",
+      "to": "engine/src/chunks.c",
+      "call_count": 25
+    },
+    {
+      "from": "engine/src/sim.c",
+      "to": "engine/src/construction.c",
+      "call_count": 5
+    },
+    {
+      "from": "engine/src/sim.c",
+      "to": "engine/src/crafting.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/sim.c",
+      "to": "engine/src/ecology.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/sim.c",
+      "to": "engine/src/entities.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/sim.c",
+      "to": "engine/src/environment.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/sim.c",
+      "to": "engine/src/fauna.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/sim.c",
+      "to": "engine/src/fluids.c",
+      "call_count": 4
+    },
+    {
+      "from": "engine/src/sim.c",
+      "to": "engine/src/game.c",
+      "call_count": 4
+    },
+    {
+      "from": "engine/src/sim.c",
+      "to": "engine/src/interactions.c",
+      "call_count": 8
+    },
+    {
+      "from": "engine/src/sim.c",
+      "to": "engine/src/items.c",
+      "call_count": 10
+    },
+    {
+      "from": "engine/src/sim.c",
+      "to": "engine/src/music_fx.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/sim.c",
+      "to": "engine/src/nutrition.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/sim.c",
+      "to": "engine/src/platform.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/sim.c",
+      "to": "engine/src/resources.c",
+      "call_count": 11
+    },
+    {
+      "from": "engine/src/sim.c",
+      "to": "engine/src/survival.c",
+      "call_count": 6
+    },
+    {
+      "from": "engine/src/sim.c",
+      "to": "engine/src/territory_policy.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/sim.c",
+      "to": "engine/src/world_physics.c",
+      "call_count": 7
+    },
+    {
+      "from": "engine/src/sim.c",
+      "to": "engine/vendor/odm_rng.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/survival.c",
+      "to": "engine/src/artifacts.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/survival.c",
+      "to": "engine/src/environment.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/survival.c",
+      "to": "engine/src/fauna.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/survival.c",
+      "to": "engine/src/platform.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/survival.c",
+      "to": "engine/src/sim.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/territory_policy.c",
+      "to": "engine/src/chunks.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/texture_store.c",
+      "to": "engine/src/platform.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/world_physics.c",
+      "to": "engine/src/artifacts.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/world_physics.c",
+      "to": "engine/src/chunks.c",
+      "call_count": 4
+    },
+    {
+      "from": "engine/src/world_physics.c",
+      "to": "engine/src/construction.c",
+      "call_count": 3
+    },
+    {
+      "from": "engine/src/world_physics.c",
+      "to": "engine/src/entities.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/world_physics.c",
+      "to": "engine/src/environment.c",
+      "call_count": 2
+    },
+    {
+      "from": "engine/src/world_physics.c",
+      "to": "engine/src/fauna.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/world_physics.c",
+      "to": "engine/src/platform.c",
+      "call_count": 1
+    },
+    {
+      "from": "engine/src/world_physics.c",
+      "to": "engine/src/resources.c",
+      "call_count": 3
+    }
+  ],
+  "functions_by_file": {
+    "engine/src/android_bridge.c": [],
+    "engine/src/artifacts.c": [
+      "add_initial_workbench",
+      "add_initial_workbench_at",
+      "alloc_artifact_system_slot",
+      "artifact_active_total",
+      "artifact_actor_can_dismantle",
+      "artifact_caps",
+      "artifact_collision_visit",
+      "artifact_light_visit",
+      "artifact_set_dormant_portable",
+      "artifact_slot_for_item",
+      "artifact_surface_allows",
+      "artifact_type_profile",
+      "fill_artifact_entry",
+      "fill_turret_artifact_entry",
+      "nearest_artifact",
+      "odg_artifact_actor_can_access_internal",
+      "odg_artifact_actor_vehicle_internal",
+      "odg_artifact_build_hint",
+      "odg_artifact_collision_radius_fx_internal",
+      "odg_artifact_create_death_cache",
+      "odg_artifact_execute_hold",
+      "odg_artifact_execute_tap",
+      "odg_artifact_is_death_cache",
+      "odg_artifact_item_deployable_internal",
+      "odg_artifact_light_permille_internal",
+      "odg_artifact_physical_height_milli_internal",
+      "odg_artifact_place_selected",
+      "odg_artifact_placement_candidate_for_item_internal",
+      "odg_artifact_position_blocked",
+      "odg_artifact_profiles_validate_internal",
+      "odg_artifact_recover_death_cache",
+      "odg_artifact_state_validate_internal",
+      "odg_artifact_storage_deposit",
+      "odg_artifact_storage_withdraw",
+      "odg_artifact_surface_allows_item_internal",
+      "odg_artifact_vehicle_can_move_actor_internal",
+      "odg_artifact_vehicle_move_actor_internal",
+      "odg_artifact_vehicle_toggle_internal",
+      "odg_artifacts_build_initial",
+      "odg_artifacts_tick",
+      "odg_copy_artifact_storage",
+      "odg_copy_artifacts",
+      "odg_copy_artifacts_page",
+      "odg_crafting_station_near_actor",
+      "odg_opened_artifact_id",
+      "owned_storage_artifact",
+      "storage_used",
+      "vehicle_dismount_candidate",
+      "vehicle_target_valid",
+      "vehicle_toggle_mount"
+    ],
+    "engine/src/chunks.c": [
+      "chunk_find",
+      "chunk_ordinal_from_global",
+      "chunk_record_set_owner",
+      "chunk_stream",
+      "global_cell_in_active_window",
+      "lattice_u16",
+      "mix64",
+      "odg_chunk_clear_trail_owner",
+      "odg_chunk_coal_candidate_count_internal",
+      "odg_chunk_descriptor_get",
+      "odg_chunk_mark_procedural_turret_removed",
+      "odg_chunk_mark_resource_depleted",
+      "odg_chunk_owner_at_global_cell",
+      "odg_chunk_prepare_procedural_turret_state_internal",
+      "odg_chunk_prepare_resource_depletion_internal",
+      "odg_chunk_procedural_turret_cell",
+      "odg_chunk_procedural_turret_reserves_local_circle_internal",
+      "odg_chunk_procedural_turret_state",
+      "odg_chunk_resource_depleted",
+      "odg_chunk_runtime_owner_at_ordinal_internal",
+      "odg_chunk_runtime_state_validate_internal",
+      "odg_chunk_runtime_trail_at_ordinal_internal",
+      "odg_chunk_set_owner_at_global_cell",
+      "odg_chunk_set_trail_at_global_cell",
+      "odg_chunk_store_procedural_turret_state",
+      "odg_chunk_summary_at",
+      "odg_chunk_trail_at_global_cell",
+      "odg_chunks_capture_active_window",
+      "odg_chunks_derived_cache_validate_internal",
+      "odg_chunks_load_active_window",
+      "odg_chunks_maybe_recenter",
+      "odg_chunks_refresh_summaries",
+      "odg_chunks_release_runtime",
+      "odg_chunks_reserve_runtime",
+      "odg_chunks_reset_runtime",
+      "odg_global_cell_center_to_local_fx_internal",
+      "odg_global_cell_to_local_internal",
+      "odg_global_center_cell_x_internal",
+      "odg_global_center_cell_z_internal",
+      "odg_global_fx_to_global_cell_internal",
+      "odg_global_fx_to_local_internal",
+      "odg_local_fx_to_global_cell_internal",
+      "odg_local_fx_to_global_fx_internal",
+      "odg_world_height_milli64",
+      "packed_get",
+      "packed_set",
+      "popcount64_local",
+      "range_from",
+      "remap_cell_after_origin",
+      "shift_world_entities",
+      "smooth_q16",
+      "summary_chunk_from_global_cell",
+      "summary_for_record",
+      "summary_increment_for_actor",
+      "summary_increment_for_chunk",
+      "value_noise_height",
+      "zigzag64"
+    ],
+    "engine/src/construction.c": [
+      "actor_can_damage_construction",
+      "actor_can_dismantle",
+      "actor_controls_construction",
+      "alloc_construction_slot",
+      "construction_cell_candidate",
+      "construction_cell_has_roof_support",
+      "construction_cell_has_shape",
+      "construction_cell_layer_occupied",
+      "construction_cell_query",
+      "construction_cell_visit",
+      "construction_collision_visit",
+      "construction_destroy_index",
+      "construction_find_instance",
+      "construction_find_roof_at_cell",
+      "construction_has_dependent_roof",
+      "construction_material_profile",
+      "construction_shape_layer",
+      "construction_shape_priority",
+      "construction_shape_supports_roof",
+      "nearest_construction",
+      "nearest_damageable_construction",
+      "nearest_repairable_construction",
+      "odg_construction_actor_may_dismantle_internal",
+      "odg_construction_airspace_radius_fx_internal",
+      "odg_construction_apply_damage_internal",
+      "odg_construction_build_hint_internal",
+      "odg_construction_collision_radius_fx_internal",
+      "odg_construction_count",
+      "odg_construction_dismantle_internal",
+      "odg_construction_execute_hold_internal",
+      "odg_construction_execute_tap_internal",
+      "odg_construction_import_legacy_artifact_internal",
+      "odg_construction_loaded_state_validate_internal",
+      "odg_construction_max_health_internal",
+      "odg_construction_physical_height_milli_internal",
+      "odg_construction_place_selected_at_global_cell_internal",
+      "odg_construction_place_selected_internal",
+      "odg_construction_placement_candidate_internal",
+      "odg_construction_position_blocked_internal",
+      "odg_construction_profiles_validate_internal",
+      "odg_construction_refresh_local_cache_internal",
+      "odg_construction_release_runtime_internal",
+      "odg_construction_repair_internal",
+      "odg_construction_reset_runtime_internal",
+      "odg_construction_selected_shape_internal",
+      "odg_construction_set_shape_internal",
+      "odg_construction_shape_height_milli_internal",
+      "odg_construction_shape_valid_internal",
+      "odg_construction_sync_globals_from_local_internal",
+      "odg_copy_construction_page",
+      "remove_construction_slot"
+    ],
+    "engine/src/content_registry.c": [
+      "odg_content_registry_validate"
+    ],
+    "engine/src/crafting.c": [
+      "craft_inventory",
+      "normalize_output_stack",
+      "odg_craft",
+      "odg_recipe_count",
+      "odg_recipe_find_output_internal",
+      "odg_recipe_get",
+      "odg_recipe_max_craftable",
+      "odg_recipe_profiles_validate_internal",
+      "odg_repair_quote_selected",
+      "odg_repair_selected",
+      "recipe_by_id",
+      "tool_repair_profile",
+      "tool_repair_profiles_validate"
+    ],
+    "engine/src/ecology.c": [
+      "drop_flora_item",
+      "odg_ecology_gather_fruit",
+      "odg_ecology_init_resource",
+      "odg_ecology_irrigate_nearest",
+      "odg_ecology_plant_selected",
+      "odg_ecology_tick",
+      "odg_flora_collision_radius_fx_internal",
+      "odg_flora_species_count",
+      "odg_flora_species_for_fruit_internal",
+      "odg_flora_species_for_seed_internal",
+      "odg_flora_species_get",
+      "odg_flora_species_internal",
+      "odg_flora_worldgen_species_internal",
+      "odg_resource_spawn_flora",
+      "refresh_stage",
+      "stage_for_age"
+    ],
+    "engine/src/entities.c": [
+      "global_fx_to_chunk",
+      "odg_entities_refresh_local_cache",
+      "odg_entities_release_runtime",
+      "odg_entities_reserve_artifacts",
+      "odg_entities_reserve_construction",
+      "odg_entities_reserve_pickups",
+      "odg_entities_reserve_resources",
+      "odg_entities_reserve_turrets",
+      "odg_entities_reset_runtime",
+      "odg_entities_spatial_lower_bound",
+      "odg_entities_spatial_mark_dirty",
+      "odg_entities_spatial_rebuild",
+      "odg_entities_spatial_refs",
+      "odg_entities_spatial_visit_near_global",
+      "odg_entities_sync_globals_from_local",
+      "reserve_bytes",
+      "spatial_add_global",
+      "spatial_ref_cmp",
+      "spatial_ref_heap_sift",
+      "spatial_ref_sort",
+      "spatial_ref_swap",
+      "spatial_reserve"
+    ],
+    "engine/src/environment.c": [
+      "env_hash_permille",
+      "env_mix",
+      "odg_day_index",
+      "odg_day_phase_permille",
+      "odg_daylight_permille",
+      "odg_environment_normal_local_q15",
+      "odg_environment_surface_local",
+      "odg_environment_tick",
+      "odg_is_night",
+      "odg_weather_rain_permille",
+      "odg_world_surface_sample64"
+    ],
+    "engine/src/fauna.c": [
+      "aggression_profile",
+      "alloc_fauna",
+      "alloc_nest",
+      "clear_nest_parent_links",
+      "create_nest",
+      "destroy_nest",
+      "fauna_actor_may_attack",
+      "fauna_birth",
+      "fauna_body_radius_fx",
+      "fauna_choose_direction",
+      "fauna_clear_combat_state",
+      "fauna_find_hostile_target",
+      "fauna_find_nearby_water",
+      "fauna_move",
+      "fauna_nocturnal_retreat",
+      "fauna_population",
+      "fauna_seek_herd",
+      "fauna_seek_shore",
+      "fauna_spawn_body_clear",
+      "fauna_spawn_night_stalker_for",
+      "fauna_species_near_actor",
+      "fauna_sync_aquatic_height",
+      "fauna_sync_surface_swim_height",
+      "fauna_target_allowed",
+      "fauna_tick_aggression",
+      "fauna_tick_hostile_spawns",
+      "fauna_tick_nests",
+      "fauna_try_ambient_forage",
+      "fauna_try_breed",
+      "fauna_try_feed",
+      "fauna_try_migration",
+      "fauna_try_predation",
+      "fauna_try_water",
+      "fauna_update_stage",
+      "fauna_water_nearby",
+      "find_ground_nest_site",
+      "find_nest_site",
+      "find_tree_nest_site",
+      "habitat_matches",
+      "loot_internal",
+      "nest_active_for_entity",
+      "nest_host_is_valid",
+      "nest_position_clear",
+      "odg_copy_fauna",
+      "odg_copy_fauna_nests",
+      "odg_fauna_build_hint",
+      "odg_fauna_build_initial",
+      "odg_fauna_deactivate_internal",
+      "odg_fauna_diet_count",
+      "odg_fauna_diet_get",
+      "odg_fauna_diet_internal",
+      "odg_fauna_habitat_count",
+      "odg_fauna_habitat_get",
+      "odg_fauna_habitat_internal",
+      "odg_fauna_hunt",
+      "odg_fauna_nesting_count",
+      "odg_fauna_nesting_get",
+      "odg_fauna_nesting_internal",
+      "odg_fauna_profiles_validate_internal",
+      "odg_fauna_refresh_local_cache",
+      "odg_fauna_runtime_combat_state_validate_internal",
+      "odg_fauna_shift_local",
+      "odg_fauna_species_count",
+      "odg_fauna_species_get",
+      "odg_fauna_species_internal",
+      "odg_fauna_tick",
+      "odg_fauna_tree_nest_position_internal",
+      "odg_loot_table_count",
+      "odg_loot_table_get",
+      "predator_relation",
+      "spawn_fauna",
+      "spawn_fauna_offspring_near",
+      "spawn_loot",
+      "spawn_nearby_habitat",
+      "surface_slope_permille",
+      "table_count_diets",
+      "table_count_habitats",
+      "table_count_loot",
+      "table_count_nesting",
+      "table_count_species",
+      "tree_nest_branch_offset"
+    ],
+    "engine/src/fluids.c": [
+      "odg_fluid_container_definition_count",
+      "odg_fluid_container_definition_get",
+      "odg_fluid_container_definition_internal",
+      "odg_fluid_definition_count",
+      "odg_fluid_definition_get",
+      "odg_fluid_definition_internal",
+      "odg_fluid_payload_id_internal",
+      "odg_fluid_payload_make_internal",
+      "odg_fluid_payload_units_internal"
+    ],
+    "engine/src/game.c": [
+      "compat_inventory_first",
+      "nearby_owned_turret_index",
+      "odg_alive_count",
+      "odg_ammo_crate_count",
+      "odg_api_version",
+      "odg_camera_dir_x_q15",
+      "odg_camera_dir_z_q15",
+      "odg_camera_mode",
+      "odg_chip_count",
+      "odg_control_basis_x_q15",
+      "odg_control_basis_z_q15",
+      "odg_control_heading_x_q15",
+      "odg_control_heading_z_q15",
+      "odg_control_local_x_q15",
+      "odg_control_local_z_q15",
+      "odg_control_strength_q15",
+      "odg_copy_framebuffer",
+      "odg_copy_stats",
+      "odg_ffi_abi_query",
+      "odg_framebuffer_bytes",
+      "odg_framebuffer_ptr",
+      "odg_framebuffer_stride_bytes",
+      "odg_hash_bytes",
+      "odg_init",
+      "odg_isqrt_u64",
+      "odg_leader_count",
+      "odg_leader_get",
+      "odg_leader_is_player",
+      "odg_leader_name_code",
+      "odg_leader_score",
+      "odg_match_over",
+      "odg_music_reactivity_q16",
+      "odg_normalize_q15",
+      "odg_player_ammo_reserve",
+      "odg_player_carried_ammo",
+      "odg_player_carried_turret_ammo",
+      "odg_player_carrying_ammo_crate",
+      "odg_player_carrying_chip",
+      "odg_player_carrying_turret",
+      "odg_player_chip_kind",
+      "odg_player_death_reason",
+      "odg_player_deaths",
+      "odg_player_drop_action_available",
+      "odg_player_facing_x_q15",
+      "odg_player_facing_z_q15",
+      "odg_player_hack_action_available",
+      "odg_player_health",
+      "odg_player_kills",
+      "odg_player_level",
+      "odg_player_max_health",
+      "odg_player_nearby_owned_turret_ammo",
+      "odg_player_nearby_owned_turret_max_ammo",
+      "odg_player_nearby_owned_turret_visible",
+      "odg_player_owned_turrets",
+      "odg_player_score",
+      "odg_player_territory_cells",
+      "odg_player_territory_permille",
+      "odg_player_trail_active",
+      "odg_player_trail_cells",
+      "odg_player_turret_action_available",
+      "odg_presentation_mode",
+      "odg_rand_bounded",
+      "odg_rand_range_fx",
+      "odg_rebuild_stats",
+      "odg_render_artifact_view",
+      "odg_render_avatar_preview",
+      "odg_render_camera_preview",
+      "odg_render_frame",
+      "odg_render_height",
+      "odg_render_size_valid",
+      "odg_render_width",
+      "odg_reset",
+      "odg_resize",
+      "odg_set_camera_mode",
+      "odg_set_input",
+      "odg_set_music_reactivity_q16",
+      "odg_set_presentation_mode",
+      "odg_set_visual_theme",
+      "odg_set_world_input",
+      "odg_state_hash",
+      "odg_stats",
+      "odg_stats_ptr",
+      "odg_step_ticks",
+      "odg_territory_total_cells",
+      "odg_tick_us",
+      "odg_turret_count",
+      "odg_visual_theme",
+      "odg_winner_id",
+      "odg_zone_radius_milli"
+    ],
+    "engine/src/geology.c": [
+      "geo_lattice_u16",
+      "geo_lerp_q16",
+      "geo_mix64",
+      "geo_noise3_q16",
+      "geo_smooth_q16",
+      "geo_zigzag64",
+      "odg_geology_surface_exposure_internal",
+      "odg_world_cave_entrance64",
+      "odg_world_cave_openness_permille64",
+      "odg_world_geology_material64",
+      "odg_world_geology_ore_resource64"
+    ],
+    "engine/src/glyphs.c": [
+      "odg_glyph5x7_internal"
+    ],
+    "engine/src/interactions.c": [
+      "bot_should_auto_pickup",
+      "container_accepts_fluid",
+      "execute_hold",
+      "execute_tap",
+      "fill_container_from_barrel",
+      "fill_container_from_environment",
+      "irrigate_from_container",
+      "melee_attack_actor",
+      "melee_attack_construction",
+      "nearest_bot_auto_pickup",
+      "nearest_enemy_actor",
+      "nearest_pickup",
+      "nearest_turret",
+      "odg_actor_drink_environment_internal",
+      "odg_apply_turret_tier",
+      "odg_command_submit",
+      "odg_copy_interaction_hint",
+      "odg_drop_inventory_slot",
+      "odg_handle_interaction",
+      "odg_process_commands",
+      "odg_rebuild_interaction_hint",
+      "odg_turret_persisted_profile_validate_internal",
+      "odg_turret_place_selected",
+      "odg_turret_profiles_validate_internal",
+      "odg_turret_state_validate_internal",
+      "odg_update_world_pickups",
+      "pickup_owned_turret",
+      "pickup_world_item",
+      "refill_owned_turret",
+      "selected_fluid_container",
+      "selected_turret_index",
+      "turret_tier_profile",
+      "use_ascension_chip",
+      "use_reprogram_chip"
+    ],
+    "engine/src/items.c": [
+      "inventory_expander_profile",
+      "odg_attack_profile_internal",
+      "odg_copy_inventory",
+      "odg_inventory_add",
+      "odg_inventory_capacity",
+      "odg_inventory_consume",
+      "odg_inventory_equip_expander_type_internal",
+      "odg_inventory_equip_first_expander_internal",
+      "odg_inventory_expanders_validate_internal",
+      "odg_inventory_find_capability_internal",
+      "odg_inventory_find_type",
+      "odg_inventory_init",
+      "odg_inventory_remove_from_slot",
+      "odg_inventory_selected",
+      "odg_inventory_selected_const",
+      "odg_inventory_total",
+      "odg_item_attack_damage_internal",
+      "odg_item_attack_profile_valid_internal",
+      "odg_item_definition_count",
+      "odg_item_definition_get",
+      "odg_item_definition_internal",
+      "odg_item_inventory_expander_recovery_internal",
+      "odg_item_inventory_expander_slots_internal",
+      "odg_item_material_variant_valid_internal",
+      "odg_item_max_durability_internal",
+      "odg_item_stack_empty_internal",
+      "odg_item_stack_metadata_compatible_internal",
+      "odg_item_stack_normalize_internal",
+      "odg_item_stack_protected_internal",
+      "odg_item_wear_internal",
+      "odg_next_instance_id",
+      "odg_slots_add",
+      "odg_slots_remove",
+      "odg_spawn_world_pickup",
+      "odg_world_pickup_deactivate_internal",
+      "odg_world_pickups_prepare_internal",
+      "pickup_set_ground_lifetime"
+    ],
+    "engine/src/map.c": [
+      "add_marker_global_fx",
+      "coarse_chunk_flags",
+      "exact_flags_for_global_cell",
+      "global_fx_to_cell",
+      "global_fx_to_milli_sat",
+      "map_chunk_coord",
+      "odg_map_query",
+      "sat_i64_i32",
+      "within_bounds"
+    ],
+    "engine/src/music_fx.c": [
+      "f_abs",
+      "f_clamp01",
+      "f_max",
+      "f_min",
+      "f_valid",
+      "music_lock",
+      "music_reset_unlocked",
+      "music_unlock",
+      "odg_copy_music_frame",
+      "odg_music_beat_q16_internal",
+      "odg_music_decay_visual_tick",
+      "odg_music_reset",
+      "odg_music_submit_pcm_f32",
+      "q16"
+    ],
+    "engine/src/nutrition.c": [
+      "food_slot_for_actor",
+      "odg_actor_consume_food_internal",
+      "odg_actor_drink_fluid_internal",
+      "odg_actor_drink_selected_internal",
+      "odg_food_definition_count",
+      "odg_food_definition_get",
+      "odg_food_definition_internal",
+      "odg_nutrition_tick",
+      "odg_player_hydration_permille",
+      "odg_player_satiety_permille",
+      "odg_player_trail_broken"
+    ],
+    "engine/src/platform.c": [
+      "memcpy",
+      "memmove",
+      "memset",
+      "odg_align_up_uintptr",
+      "odg_mem_free",
+      "odg_mem_heap_reset",
+      "odg_mem_realloc",
+      "odg_memcpy",
+      "odg_memset",
+      "odg_wasm_ensure_memory"
+    ],
+    "engine/src/render.c": [
+      "actor_base_color",
+      "actor_shadow",
+      "artifact_shell_color",
+      "avatar_cube",
+      "avatar_face",
+      "basis_point",
+      "beveled_box_y",
+      "biome_cache_lookup",
+      "biome_surface_color",
+      "biome_surface_transition",
+      "box_y",
+      "clamp_color_channel",
+      "clear_frame",
+      "clip_intersection",
+      "clip_intersection_color",
+      "clip_near_triangle",
+      "clip_near_triangle_color",
+      "colored_camera_vertex",
+      "construction_shell_color",
+      "decor_hash",
+      "depth_fog_inv",
+      "distant_relief_corner",
+      "edge_span_clip",
+      "edgef",
+      "faceted_canopy",
+      "faceted_cone_y",
+      "faceted_rock",
+      "float_ceil_to_int",
+      "float_floor_to_int",
+      "flora_tree_visual_form",
+      "game_local_to_render_fx",
+      "grass_sprig",
+      "grass_tuft",
+      "ground_and_grid",
+      "ground_cell_quad",
+      "ground_disc16",
+      "ground_patch8",
+      "ground_ribbon_line",
+      "ground_shadow",
+      "ground_shadow_layer",
+      "invz16",
+      "line_overlay",
+      "low_shrub",
+      "music_visual_beat",
+      "octa",
+      "odg_render_internal",
+      "oriented_box_y",
+      "oriented_point",
+      "outer_horizon_relief_corner",
+      "palette",
+      "pickup_tier_color",
+      "postprocess_frame",
+      "prepare_depth_fog",
+      "preview_turn",
+      "prism8_y",
+      "project_camera",
+      "put_px",
+      "put_px_index",
+      "put_px_textured_index",
+      "quad",
+      "quad_color",
+      "queue_world_label",
+      "raster_avatar_triangle",
+      "raster_camera_triangle",
+      "raster_camera_triangle_alpha",
+      "raster_camera_triangle_color",
+      "render_artifact_node_ref",
+      "render_artifact_nodes",
+      "render_artifact_placement_ghost",
+      "render_basis_at",
+      "render_boundaries",
+      "render_building",
+      "render_construction_damage",
+      "render_construction_module",
+      "render_construction_node_ref",
+      "render_construction_nodes",
+      "render_construction_placement_ghost",
+      "render_distant_landmarks",
+      "render_distant_scenery",
+      "render_distant_terrain",
+      "render_domain_beacons",
+      "render_fauna",
+      "render_fauna_nests",
+      "render_flora_fruit",
+      "render_global_cell_center_local_f",
+      "render_global_fx_local_f",
+      "render_micro_scenery",
+      "render_near_ground_detail",
+      "render_outer_horizon",
+      "render_particles",
+      "render_resource_node_ref",
+      "render_resource_nodes",
+      "render_routes",
+      "render_screen_labels",
+      "render_sky_clouds",
+      "render_surface_water",
+      "render_territory_edges",
+      "render_trails",
+      "render_tree",
+      "render_turret_ref",
+      "render_turrets",
+      "render_visible_spatial",
+      "render_weather_rain",
+      "render_world_obstacle",
+      "render_world_pickup_ref",
+      "render_world_pickups",
+      "rgba_average4",
+      "rgba_lerp",
+      "rgba_mix",
+      "runner",
+      "screen_blend_pixel",
+      "screen_draw_glyph",
+      "screen_draw_text",
+      "screen_fill_rect",
+      "screen_text_width",
+      "sky_soft_ellipse",
+      "smoothstep01",
+      "surface_box",
+      "tapered_box_y",
+      "terrain_vertex_material",
+      "terrain_yf",
+      "territory_color",
+      "territory_contour_edge_points",
+      "territory_contour_line",
+      "territory_contour_pair",
+      "trail_ribbon_segment",
+      "tri",
+      "tri_alpha",
+      "tri_color",
+      "turret_ammo_label",
+      "turret_color",
+      "turret_head_direction",
+      "turret_shell_color",
+      "turret_trim_color",
+      "u32_digits",
+      "visual_hash2",
+      "visual_hash_cell64",
+      "visual_smooth_noise_scale",
+      "weather_mix32",
+      "world_face_light",
+      "world_point_maybe_visible",
+      "world_to_camera"
+    ],
+    "engine/src/resources.c": [
+      "add_bootstrap_resource_at",
+      "add_near_actor",
+      "canonical_resource_choose_cell",
+      "canonical_resource_layout",
+      "canonical_resource_spacing_clear",
+      "canonical_resource_surface_allows",
+      "complete_resource_harvest",
+      "harvest_required",
+      "materialize_canonical_resource",
+      "mix32",
+      "nearest_resource",
+      "obstacle_overlap",
+      "odg_copy_resources",
+      "odg_resource_build_hint",
+      "odg_resource_collision_radius_fx_internal",
+      "odg_resource_flora_definition_internal",
+      "odg_resource_harvest_allows_hand_internal",
+      "odg_resource_harvest_item_type_internal",
+      "odg_resource_harvest_material_internal",
+      "odg_resource_harvest_min_tool_tier_internal",
+      "odg_resource_harvest_tool_capability_internal",
+      "odg_resource_harvest_tool_type_internal",
+      "odg_resource_hold_tick",
+      "odg_resource_is_flora_internal",
+      "odg_resource_physical_height_milli_internal",
+      "odg_resource_position_blocked",
+      "odg_resource_position_blocked_ignoring_internal",
+      "odg_resource_profiles_validate_internal",
+      "odg_resource_state_validate_internal",
+      "odg_resource_turret_hit",
+      "odg_resources_build",
+      "odg_resources_migrate_canonical_worldgen_internal",
+      "odg_resources_stream_refresh",
+      "odg_resources_tick",
+      "resource_chunk_hash",
+      "resource_collision_visit",
+      "resource_deposit_profile",
+      "resource_geology_exposure_local",
+      "resource_harvest_particle_rgba",
+      "resource_harvest_quantity",
+      "resource_kind_requires_geological_exposure",
+      "resource_max_collision_radius_fx",
+      "resource_spawn_clear",
+      "resource_surface_allows_kind",
+      "set_resource",
+      "set_resource_with_identity",
+      "spawn_chunk_resource_legacy",
+      "spill_flora_fruit"
+    ],
+    "engine/src/save.c": [
+      "counted_bytes",
+      "get_u32_le",
+      "get_u64_le",
+      "logical_offset",
+      "migrate_legacy_nests_from_prefix",
+      "odg_save_blob_size",
+      "odg_save_current_semantics_validate_internal",
+      "odg_save_identity_validate_internal",
+      "odg_save_instance_semantics_validate_internal",
+      "odg_save_load",
+      "odg_save_schema_supported",
+      "odg_save_schema_version",
+      "odg_save_write",
+      "payload_checksum",
+      "payload_size_for",
+      "payload_size_for_schema",
+      "prefix_size",
+      "put_u32_le",
+      "put_u64_le",
+      "read_section_header",
+      "save_actor_state_validate_internal",
+      "save_canonicalize_non_authority_bytes",
+      "save_current_world_semantics_validate_internal",
+      "save_fauna_expected_stage_internal",
+      "save_fauna_nest_state_validate_internal",
+      "save_fauna_state_validate_internal",
+      "save_instance_hash",
+      "save_instance_register",
+      "save_inventory_canonical_validate",
+      "save_load_backup_capture",
+      "save_load_backup_copy",
+      "save_load_backup_dispose",
+      "save_load_backup_restore",
+      "save_migrate_manual_turret_instance_namespace_internal",
+      "save_migration_max_sequential_stack",
+      "save_migration_rewrite_turret_handle",
+      "save_non_authority_bytes_are_canonical",
+      "save_payload_stack_validate",
+      "save_register_unique_stack_instance",
+      "save_schema_next",
+      "save_stack_canonical_validate",
+      "save_stack_is_world_handle",
+      "save_stack_material_valid",
+      "save_stack_payload_semantic_validate",
+      "suffix_offset",
+      "suffix_size",
+      "write_section"
+    ],
+    "engine/src/sim.c": [
+      "actor_position_clear",
+      "actor_spawn_candidate_valid",
+      "actor_spawn_surface_valid",
+      "actor_support_height_milli",
+      "actor_terrain_transition_clear",
+      "append_global_cell_center_to_path",
+      "approach_heading_velocity",
+      "approach_signed",
+      "bot_best_capability_slot",
+      "bot_best_tool_slot",
+      "bot_choose_expansion",
+      "bot_control",
+      "bot_craft_goal",
+      "bot_enemy_turret_risk",
+      "bot_equip_inventory_expander",
+      "bot_escape_water_direction",
+      "bot_find_accessible_empty_raft",
+      "bot_find_accessible_food_pickup",
+      "bot_find_accessible_fruit_resource",
+      "bot_find_accessible_water",
+      "bot_find_damaged_home_construction",
+      "bot_find_land_reachable_resource_item",
+      "bot_find_own_artifact",
+      "bot_find_own_death_cache",
+      "bot_find_resource_item",
+      "bot_find_safe_home_step",
+      "bot_find_salvageable_construction",
+      "bot_find_shore",
+      "bot_food_direction",
+      "bot_fortify_home_goal",
+      "bot_gather_resource_land_only",
+      "bot_harvest_goal",
+      "bot_home_fortification_target",
+      "bot_inventory_has",
+      "bot_move_to_station",
+      "bot_nav_edge_clear",
+      "bot_nav_land_toward",
+      "bot_nav_toward",
+      "bot_nav_vehicle_toward",
+      "bot_owned_turret_count",
+      "bot_place_owned_artifact",
+      "bot_place_turret_item",
+      "bot_recipe_affordable",
+      "bot_recipe_goal",
+      "bot_repair_home_construction_goal",
+      "bot_salvage_construction_goal",
+      "bot_select_empty_hand",
+      "bot_set_return_direction",
+      "bot_set_side_direction",
+      "bot_supply_direction",
+      "bot_survival_direction",
+      "bot_try_inventory_water",
+      "bot_vehicle_direction_clear",
+      "bot_water_direction",
+      "break_actor_trail",
+      "camera_segment_clear",
+      "capture_actor",
+      "cell_axis_distance_u64",
+      "cell_x",
+      "cell_z",
+      "check_match_end",
+      "clear_actor_trail",
+      "contact_candidate_clear",
+      "direction_clear_for_actor",
+      "eliminate_actor",
+      "generic_pickup_separated",
+      "global_cell_center_local_fx",
+      "handle_drop_button",
+      "initialize_open_domain_compat_mask",
+      "move_actor_with_slide",
+      "nearest_owned_respawn_global",
+      "odg_actor_apply_damage_internal",
+      "odg_bot_economy_direction_internal",
+      "odg_bot_logistics_prepare_vehicle_internal",
+      "odg_bot_navigation_edge_mask_internal",
+      "odg_bot_navigation_rebuild_internal",
+      "odg_bot_route_requires_raft_internal",
+      "odg_cell_center_x",
+      "odg_cell_center_z",
+      "odg_cell_from_world",
+      "odg_emit_particles",
+      "odg_reset_presentation_rng_internal",
+      "odg_sim_step",
+      "odg_turret_drop_candidate_internal",
+      "odg_turret_persist_procedural",
+      "odg_turret_prepare_procedural_persist",
+      "odg_turrets_stream_refresh",
+      "odg_update_turret_ownership_internal",
+      "odg_world_build",
+      "point_in_trail_polygon",
+      "position_clear",
+      "process_actor_global_cell",
+      "q15_cross",
+      "q15_dot",
+      "recovery_neutral_safe_cell",
+      "resolve_actor_obstacles",
+      "resolve_trail_contacts",
+      "rotate_dir_q15",
+      "rotate_vec_inertial_toward",
+      "set_territory_global",
+      "set_territory_owner",
+      "spawn_actor",
+      "spawn_initial_pickups",
+      "stamp_initial_territory",
+      "stamp_recovery_territory",
+      "steer_translation_heading",
+      "steering_speed_factor_q15",
+      "sync_actor_score",
+      "terrain_speed_factor_q15",
+      "territory_at_local_fx",
+      "trail_advance_head_global",
+      "trail_at_local_fx",
+      "trail_commit_head",
+      "trail_path_append",
+      "turret_acquire_target",
+      "turret_cache_target_local_cell",
+      "turret_capture_cell_eligible",
+      "turret_chunk_in_set",
+      "turret_clear_target",
+      "turret_find_harvest_target",
+      "turret_find_territory_target",
+      "turret_find_trail_target",
+      "turret_find_trail_target_for_actor",
+      "turret_fire_locked",
+      "turret_is_reprogrammable_enemy",
+      "turret_resource_target",
+      "turret_stream_free_slot",
+      "turret_target_local_fx",
+      "turret_target_valid",
+      "update_actor",
+      "update_particles",
+      "update_respawn",
+      "update_turrets",
+      "world_bootstrap_postconditions"
+    ],
+    "engine/src/survival.c": [
+      "actor_head_submerged",
+      "fauna_head_submerged",
+      "fauna_is_aquatic",
+      "odg_actor_is_swimming_internal",
+      "odg_actor_swim_target_offset_fx_internal",
+      "odg_player_oxygen_permille",
+      "odg_survival_reset_actor",
+      "odg_survival_reset_fauna",
+      "odg_survival_reset_legacy_world",
+      "odg_survival_reset_new_world",
+      "odg_survival_state_validate",
+      "odg_survival_tick",
+      "odg_worldgen_version",
+      "persistent_runtime_reset",
+      "respiration_full",
+      "respiration_state_validate_internal",
+      "respiration_update"
+    ],
+    "engine/src/territory_policy.c": [
+      "odg_territory_actor_controls_position",
+      "odg_territory_allows_environment_action"
+    ],
+    "engine/src/texture_store.c": [
+      "bot_procedural_skin",
+      "build_face_mips",
+      "hash32",
+      "mip_dim",
+      "mip_texel_offset",
+      "odg_avatar_texture_clear",
+      "odg_avatar_texture_present",
+      "odg_avatar_texture_sample_lod_internal",
+      "odg_avatar_texture_upload",
+      "pack_rgba",
+      "sample_player_bilinear"
+    ],
+    "engine/src/world_physics.c": [
+      "airspace_accumulate_top",
+      "airspace_artifact_visit",
+      "airspace_construction_visit",
+      "airspace_resource_visit",
+      "airspace_turret_visit",
+      "odg_actor_bodies_clear_internal",
+      "odg_airspace_required_offset_milli_internal",
+      "odg_dynamic_position_clear_internal",
+      "odg_fauna_bodies_clear_internal",
+      "odg_position_clear_ignoring_artifact_internal",
+      "odg_position_clear_ignoring_resource_internal",
+      "odg_position_clear_internal",
+      "odg_terrain_height_fx",
+      "odg_world_cell_safe_ground_internal",
+      "odg_world_circle_aabb_overlap_internal",
+      "odg_world_position_safe_ground_internal",
+      "position_clear_ignoring_internal",
+      "turret_collision_visit",
+      "turret_position_blocked"
+    ],
+    "engine/vendor/odm_rng.c": [
+      "odm_rng_bounded_u32",
+      "odm_rng_derive_seed",
+      "odm_rng_next_u32",
+      "odm_rng_next_u64",
+      "odm_rng_seed",
+      "odm_rng_seed_derived",
+      "odm_rng_step",
+      "odm_rng_valid",
+      "odm_splitmix64"
+    ],
+    "engine/vendor/odm_status.c": [
+      "odm_status_is_ok",
+      "odm_status_name"
+    ]
+  },
+  "gaps": []
+}

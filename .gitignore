@@ -1,0 +1,27 @@
+# Native/generated builds
+/build/
+/artifacts/
+*.o
+*.so
+*.a
+*.wasm
+*.apk
+*.aab
+*.ppm
+*.tmp
+*.bak
+*.log
+
+# Flutter
+/app/flutter/build/
+/app/flutter/.dart_tool/
+/app/flutter/.gradle/
+/app/flutter/android/.gradle/
+/app/flutter/android/local.properties
+
+# Python/editor
+**/__pycache__/
+*.pyc
+.DS_Store
+.idea/
+.vscode/
