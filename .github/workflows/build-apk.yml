@@ -1,0 +1,61 @@
+name: Build ODPAR APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout build repo
+        uses: actions/checkout@v4
+
+      - name: Checkout ODPAR source
+        uses: actions/checkout@v4
+        with:
+          repository: caost032/Territorial-domain
+          path: source
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.10.2
+
+      - name: Android SDK pieces
+        run: |
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager "cmake;3.22.1" "ndk;27.0.12077973" || true
+
+      - name: Build APK
+        working-directory: source/app/flutter
+        run: |
+          set -euo pipefail
+          chmod +x android/gradlew
+          flutter --version
+          flutter pub get
+          flutter build apk --release --target-platform android-arm64
+          mkdir -p "$GITHUB_WORKSPACE/out"
+          cp build/app/outputs/flutter-apk/app-release.apk "$GITHUB_WORKSPACE/out/ODPAR-Territorial-Domain-arm64.apk"
+          sha256sum "$GITHUB_WORKSPACE/out/ODPAR-Territorial-Domain-arm64.apk" > "$GITHUB_WORKSPACE/out/SHA256SUMS.txt"
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ODPAR-Territorial-Domain-APK
+          path: out/*
