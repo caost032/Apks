@@ -22,15 +22,65 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
-      - name: Validate ODPAR contract
+      - name: Apply audited Android source fixes
         run: |
           set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def replace_exact(path: str, old: str, new: str, label: str) -> None:
+              p = Path(path)
+              text = p.read_text(encoding='utf-8')
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{label}: expected exactly one source occurrence, got {count}')
+              p.write_text(text.replace(old, new), encoding='utf-8')
+
+          replace_exact(
+              'app/flutter/lib/src/engine/game_runtime.dart',
+              "import 'dart:ffi';",
+              "import 'dart:ffi' hide Size;",
+              'Dart ffi Size collision',
+          )
+          main = 'app/flutter/android/app/src/main/kotlin/com/odpar/territorial_domain/MainActivity.kt'
+          replace_exact(main, 'import java.nio.ByteBuffer\n', '', 'unused ByteBuffer import')
+          replace_exact(
+              main,
+              'import io.flutter.embedding.android.FlutterActivity',
+              'import io.flutter.embedding.android.FlutterFragmentActivity',
+              'FlutterFragmentActivity import',
+          )
+          replace_exact(
+              main,
+              'class MainActivity : FlutterActivity() {',
+              'class MainActivity : FlutterFragmentActivity() {',
+              'FlutterFragmentActivity superclass',
+          )
+          replace_exact(main, r'Regex("\s+")', r'Regex("\\s+")', 'Kotlin regex escape')
+          replace_exact(
+              main,
+              'OsConstants.O_RDONLY or OsConstants.O_DIRECTORY',
+              'OsConstants.O_RDONLY',
+              'portable directory fsync open flags',
+          )
+          replace_exact(
+              main,
+              'if (generation != localGeneration) continue',
+              'if (generation != localGeneration) return@synchronized',
+              'Kotlin synchronized control flow',
+          )
+          PY
+
+      - name: Validate ODPAR and Android build contracts
+        run: |
+          set -euo pipefail
+          python3 tools/check_host_contract.py
+          python3 tools/check_android_build_contract.py
           api="$(sed -n 's/^#define ODG_API_VERSION UINT32_C(\([0-9][0-9]*\)).*/\1/p' engine/include/odpar_game.h)"
           abi="$(sed -n 's/^#define ODG_FFI_ABI_VERSION UINT32_C(\([0-9][0-9]*\)).*/\1/p' engine/include/odpar_game.h)"
           save="$(sed -n 's/^#define ODG_SAVE_SCHEMA_VERSION UINT32_C(\([0-9][0-9]*\)).*/\1/p' engine/include/odpar_game.h)"
-          echo "API=$api ABI=$abi SAVE=$save"
           test "$api" = "37"
           test "$abi" = "9"
           test "$save" = "25"
@@ -47,6 +97,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
+          flutter-version: "3.47.1"
           channel: stable
           cache: true
 
@@ -59,69 +110,35 @@ jobs:
           yes | "$SDKMANAGER" --licenses >/dev/null || true
           "$SDKMANAGER" "cmake;3.22.1"
 
-      - name: Apply verified source fixes
-        run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          from pathlib import Path
-
-          def replace_exact(path: str, old: str, new: str, label: str) -> None:
-              p = Path(path)
-              text = p.read_text()
-              count = text.count(old)
-              if count != 1:
-                  raise SystemExit(f'{label}: expected source not found exactly once (count={count})')
-              p.write_text(text.replace(old, new))
-
-          replace_exact(
-              'app/flutter/lib/src/platform/android_host.dart',
-              '  bool structurallyLoadable => !legacy && !corrupt;',
-              '  bool get structurallyLoadable => !legacy && !corrupt;',
-              'android_host.dart structurallyLoadable',
-          )
-          replace_exact(
-              'app/flutter/lib/src/engine/game_runtime.dart',
-              "import 'dart:ffi';",
-              "import 'dart:ffi' hide Size;",
-              'game_runtime.dart dart:ffi Size collision',
-          )
-          replace_exact(
-              'app/flutter/android/app/src/main/kotlin/com/odpar/territorial_domain/MainActivity.kt',
-              'import io.flutter.embedding.android.FlutterActivity',
-              'import io.flutter.embedding.android.FlutterFragmentActivity',
-              'MainActivity FlutterFragmentActivity import',
-          )
-          replace_exact(
-              'app/flutter/android/app/src/main/kotlin/com/odpar/territorial_domain/MainActivity.kt',
-              'class MainActivity : FlutterActivity() {',
-              'class MainActivity : FlutterFragmentActivity() {',
-              'MainActivity superclass',
-          )
-          replace_exact(
-              'app/flutter/android/app/src/main/kotlin/com/odpar/territorial_domain/MainActivity.kt',
-              r'Regex("\s+")',
-              r'Regex("\\s+")',
-              'MainActivity whitespace regex escape',
-          )
-          replace_exact(
-              'app/flutter/android/app/src/main/kotlin/com/odpar/territorial_domain/MainActivity.kt',
-              'OsConstants.O_RDONLY or OsConstants.O_DIRECTORY',
-              'OsConstants.O_RDONLY',
-              'MainActivity directory fsync flags',
-          )
-          PY
-
-      - name: Flutter pub get
+      - name: Resolve Flutter dependencies
         working-directory: app/flutter
         run: flutter pub get
+
+      - name: Analyze Dart and Flutter host
+        working-directory: app/flutter
+        run: flutter analyze --no-fatal-infos
+
+      - name: Run Flutter host tests
+        working-directory: app/flutter
+        run: flutter test
 
       - name: Build Android APK arm64
         working-directory: app/flutter
         run: |
           set -euo pipefail
           flutter build apk --release --target-platform android-arm64
+          apk="build/app/outputs/flutter-apk/app-release.apk"
+          test -s "$apk"
+          unzip -l "$apk" | grep -F 'lib/arm64-v8a/libodpar_territorial_domain.so'
+          unzip -l "$apk" | grep -F 'lib/arm64-v8a/libflutter.so'
+          SDK_ROOT="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-/usr/local/lib/android/sdk}}"
+          BUILD_TOOLS="$(find "$SDK_ROOT/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
+          test -x "$BUILD_TOOLS/apksigner"
+          test -x "$BUILD_TOOLS/zipalign"
+          "$BUILD_TOOLS/apksigner" verify --verbose "$apk"
+          "$BUILD_TOOLS/zipalign" -c -P 16 -v 4 "$apk"
           mkdir -p "$GITHUB_WORKSPACE/out"
-          cp build/app/outputs/flutter-apk/app-release.apk "$GITHUB_WORKSPACE/out/ODPAR-Territorial-Domain-api${ODPAR_API_VERSION}-abi${ODPAR_ABI_VERSION}-save${ODPAR_SAVE_VERSION}-arm64.apk"
+          cp "$apk" "$GITHUB_WORKSPACE/out/ODPAR-Territorial-Domain-api${ODPAR_API_VERSION}-abi${ODPAR_ABI_VERSION}-save${ODPAR_SAVE_VERSION}-arm64.apk"
           sha256sum "$GITHUB_WORKSPACE"/out/*.apk > "$GITHUB_WORKSPACE/out/SHA256SUMS.txt"
 
       - name: Upload APK artifact

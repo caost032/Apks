@@ -29,7 +29,7 @@ final class WorldSlot {
   final bool legacy;
   final bool corrupt;
 
-  bool structurallyLoadable => !legacy && !corrupt;
+  bool get structurallyLoadable => !legacy && !corrupt;
 
   WorldSlot copyWith({
     String? name,

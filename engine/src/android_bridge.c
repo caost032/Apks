@@ -71,4 +71,7 @@ JNIEXPORT void JNICALL
 Java_com_odpar_territorial_1domain_MainActivity_nativeResetMusic(JNIEnv *env, jobject self) {
     (void)env; (void)self; odg_music_reset();
 }
+#else
+/* Keep strict non-Android CMake mirror builds valid without exporting code. */
+typedef int odg_android_bridge_nonempty_translation_unit;
 #endif
