@@ -104,6 +104,45 @@ def normalize(check_only: bool) -> None:
         "app/flutter/lib/src/engine/game_runtime.dart",
         "import 'dart:ffi';", "import 'dart:ffi' hide Size;", check_only,
     )
+    replace(
+        "app/flutter/lib/src/ui/game_screen.dart",
+        "StationPanel(runtime: widget.runtime, artifact: openedArtifact!, onClose: widget.runtime.closeArtifact)",
+        "StationPanel(runtime: widget.runtime, artifact: openedArtifact, onClose: widget.runtime.closeArtifact)",
+        check_only,
+    )
+
+    test = "app/flutter/test/input_router_test.dart"
+    text = load(test)
+    old = "input.setActionsEnabled(action: true, drop: true);"
+    new = "input.setActionsEnabled(action: true, movement: true, drop: true);"
+    if old in text:
+        if check_only:
+            die(f"{test}: stale movement action signature remains")
+        if text.count(old) != 2:
+            die(f"{test}: expected two legacy movement signatures, found {text.count(old)}")
+        store(test, text.replace(old, new), check_only=False)
+    elif text.count(new) != 2:
+        die(f"{test}: normalized movement signature count is {text.count(new)}, expected 2")
+    replace(test,
+            "input.setActionsEnabled(action: false, drop: false);",
+            "input.setActionsEnabled(action: false, movement: false, drop: false);", check_only)
+    replace(test,
+            "    expect(second.buttons & odgButtonDrop, isNot(0));\n    expect(input.sample().buttons, 0);",
+            "    expect(second.buttons & odgButtonDrop, isNot(0));\n    input.pointerUp(3);\n    expect(input.sample().buttons, 0);",
+            check_only)
+    replace(test,
+            "    input.pointerDown(8, layout.actionRect.center);\n\n    input.clear();",
+            "    input.pointerDown(8, layout.actionRect.center);\n    input.pointerDown(9, layout.jumpRect.center);\n    input.pointerDown(10, layout.dashRect.center);\n    input.pointerDown(11, layout.dropRect.center);\n\n    input.clear();",
+            check_only)
+
+    replace(
+        "app/flutter/pubspec.yaml",
+        "  ffi: ^2.1.4", "  ffi: 2.2.0", check_only,
+    )
+    replace(
+        "app/flutter/pubspec.yaml",
+        "  flutter_lints: ^6.0.0", "  flutter_lints: 6.0.0", check_only,
+    )
 
     kt = "app/flutter/android/app/src/main/kotlin/com/odpar/territorial_domain/MainActivity.kt"
     replace(kt, "import io.flutter.embedding.android.FlutterActivity",
@@ -151,6 +190,13 @@ def verify() -> None:
         "app/flutter/android/gradle.properties": ["android.useAndroidX=true", "android.newDsl=false"],
         "app/flutter/lib/src/platform/android_host.dart": ["bool get structurallyLoadable => !legacy && !corrupt;"],
         "app/flutter/lib/src/engine/game_runtime.dart": ["import 'dart:ffi' hide Size;"],
+        "app/flutter/lib/src/ui/game_screen.dart": ["artifact: openedArtifact, onClose: widget.runtime.closeArtifact"],
+        "app/flutter/test/input_router_test.dart": [
+            "setActionsEnabled(action: true, movement: true, drop: true)",
+            "setActionsEnabled(action: false, movement: false, drop: false)",
+            "input.pointerUp(3);", "layout.jumpRect.center", "layout.dashRect.center",
+        ],
+        "app/flutter/pubspec.yaml": ["  ffi: 2.2.0", "  flutter_lints: 6.0.0"],
         "app/flutter/android/app/src/main/kotlin/com/odpar/territorial_domain/MainActivity.kt": [
             "FlutterFragmentActivity", 'Regex("\\\\s+")',
             "Os.open(dir.absolutePath, OsConstants.O_RDONLY, 0)", "return@synchronized",
@@ -179,6 +225,11 @@ def verify() -> None:
             "bool structurallyLoadable => !legacy && !corrupt;",
         ],
         "app/flutter/lib/src/engine/game_runtime.dart": ["import 'dart:ffi';"],
+        "app/flutter/lib/src/ui/game_screen.dart": ["artifact: openedArtifact!"],
+        "app/flutter/test/input_router_test.dart": [
+            "setActionsEnabled(action: true, drop: true)",
+            "setActionsEnabled(action: false, drop: false)",
+        ],
     }
     for rel, markers in stale.items():
         text = load(rel)
