@@ -59,27 +59,56 @@ jobs:
           yes | "$SDKMANAGER" --licenses >/dev/null || true
           "$SDKMANAGER" "cmake;3.22.1"
 
-      - name: Apply verified Dart source fixes
+      - name: Apply verified source fixes
         run: |
           set -euo pipefail
           python3 - <<'PY'
           from pathlib import Path
 
-          host = Path('app/flutter/lib/src/platform/android_host.dart')
-          text = host.read_text()
-          old = '  bool structurallyLoadable => !legacy && !corrupt;'
-          new = '  bool get structurallyLoadable => !legacy && !corrupt;'
-          if text.count(old) != 1:
-              raise SystemExit('android_host.dart: expected structurallyLoadable source not found exactly once')
-          host.write_text(text.replace(old, new))
+          def replace_exact(path: str, old: str, new: str, label: str) -> None:
+              p = Path(path)
+              text = p.read_text()
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{label}: expected source not found exactly once (count={count})')
+              p.write_text(text.replace(old, new))
 
-          runtime = Path('app/flutter/lib/src/engine/game_runtime.dart')
-          text = runtime.read_text()
-          old = "import 'dart:ffi';"
-          new = "import 'dart:ffi' hide Size;"
-          if text.count(old) != 1:
-              raise SystemExit('game_runtime.dart: expected dart:ffi import not found exactly once')
-          runtime.write_text(text.replace(old, new))
+          replace_exact(
+              'app/flutter/lib/src/platform/android_host.dart',
+              '  bool structurallyLoadable => !legacy && !corrupt;',
+              '  bool get structurallyLoadable => !legacy && !corrupt;',
+              'android_host.dart structurallyLoadable',
+          )
+          replace_exact(
+              'app/flutter/lib/src/engine/game_runtime.dart',
+              "import 'dart:ffi';",
+              "import 'dart:ffi' hide Size;",
+              'game_runtime.dart dart:ffi Size collision',
+          )
+          replace_exact(
+              'app/flutter/android/app/src/main/kotlin/com/odpar/territorial_domain/MainActivity.kt',
+              'import io.flutter.embedding.android.FlutterActivity',
+              'import io.flutter.embedding.android.FlutterFragmentActivity',
+              'MainActivity FlutterFragmentActivity import',
+          )
+          replace_exact(
+              'app/flutter/android/app/src/main/kotlin/com/odpar/territorial_domain/MainActivity.kt',
+              'class MainActivity : FlutterActivity() {',
+              'class MainActivity : FlutterFragmentActivity() {',
+              'MainActivity superclass',
+          )
+          replace_exact(
+              'app/flutter/android/app/src/main/kotlin/com/odpar/territorial_domain/MainActivity.kt',
+              r'Regex("\s+")',
+              r'Regex("\\s+")',
+              'MainActivity whitespace regex escape',
+          )
+          replace_exact(
+              'app/flutter/android/app/src/main/kotlin/com/odpar/territorial_domain/MainActivity.kt',
+              'OsConstants.O_RDONLY or OsConstants.O_DIRECTORY',
+              'OsConstants.O_RDONLY',
+              'MainActivity directory fsync flags',
+          )
           PY
 
       - name: Flutter pub get
