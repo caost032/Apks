@@ -1,0 +1,37 @@
+{
+  "project": "ODPAR: Territorial Domain Greenfield",
+  "checkpoint": "ODPAR-TD-GREENFIELD-CHECKPOINT-2026-08-25-022957",
+  "created_at": "2026-08-25T02:29:57-05:00",
+  "authority": {
+    "role": "Refundacion Greenfield CURRENT_GREENFIELD G00..G23 plus current master prompt",
+    "zip_sha256": "f8378e8bcd19e19885f430f58ba21a8bd303d485b57c1d0695a78dabab057344",
+    "files_traversed": 74,
+    "bytes_traversed": 612297
+  },
+  "legacy": {
+    "role": "API38 read-only archaeology",
+    "zip_sha256": "a6311729e43712ba53aa524a4b8e5812819ee3fd349962ddb1c21437500c46be",
+    "files_traversed": 229,
+    "bytes_traversed": 72669187,
+    "pass_g20_inventory_match": "229/229; 0 missing; 0 extra; 0 size mismatch; 0 sha256 mismatch",
+    "byte_identical_greenfield_files": 0
+  },
+  "vertical_slice_1": {
+    "source_state": "implemented for locally-verifiable portion",
+    "product_definition_of_done": false,
+    "native_fast_gate": "PASS",
+    "cmake_release": "PASS",
+    "asan_ubsan_focused": "PASS",
+    "python_guardian_compile": "PASS",
+    "flutter_dart_gate": "NOT_RUN_TOOLCHAIN_ABSENT",
+    "android_build": "NOT_RUN_TOOLCHAIN_ABSENT",
+    "apk_created": false,
+    "physical_install_playtest": "NOT_RUN",
+    "notes": "No APK is claimed. Flutter/Dart/Gradle/Android SDK/adb were absent from the local container."
+  },
+  "vertical_slice_2_started": false,
+  "product_abis": ["armeabi-v7a", "arm64-v8a"],
+  "dev_optional_abis": ["x86_64"],
+  "host_ffi_public_odg_symbols": 8,
+  "ci_android_gate": ".github/workflows/android-greenfield.yml"
+}

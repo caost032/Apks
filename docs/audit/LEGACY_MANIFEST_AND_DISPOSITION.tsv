@@ -1,0 +1,230 @@
+path	bytes	sha256	kind	disposition	note
+.github/workflows/android.yml	6805	c850d4346b0a3dc8a5c2b43d3e8d8cd1ddd4c15c73b95f503ad12ba609957198	text-or-container	REWRITE_CI	workflow is evidence only; Greenfield CI has one new artifact contract
+.github/workflows/api38-universal-apk.yml	2394	90684a48e9f21fdcac56bff592d3a014f977df304b371a9db873c003db94f1b9	text-or-container	REIMPLEMENT_CONCEPT	coherent Android matrix and artifact-verification lessons only
+.gitignore	228	eea17e9f4b772f5a8173e95fe9d1f5ba8b0b016f20786c108b05eac7987b312f	text-or-container	REFERENCE	read-only legacy evidence
+APK_BUILD_POSTMORTEM_API38_ABI10_SAVE30.txt	26664	af712be104e03f83498e49368b2d237799f8a2b598f10501d43ec1e462c714f1	text-or-container	REIMPLEMENT_CONCEPT	authoritative failure evidence; no code inheritance
+CERTIFICATION.md	9807	27743757d8c5044aecc18b66dfefdef3788d5847d734a61b8832421253467134	text-or-container	REFERENCE_HISTORY	historical evidence only
+CHANGELOG.md	14552	f54f751c48522994b4979fafb5840f1e2ccf340d43bc04bfde2d9ad6b7766961	text-or-container	REFERENCE_HISTORY	historical evidence only
+CHECKPOINT_MANIFEST.sha256	182	b86680531afe09a4077faf9563bcf17d97f9e1ba066c5f9afa8b7e6582b885db	text-or-container	REFERENCE_DESIGN	legacy design/evidence may inform audit but cannot override Greenfield authority
+CHECKPOINT_MANIFEST.txt	8168	abda9b40c93c498ee6cee296e99c0f735c07697f76e42c191f37128176a2c91f	text-or-container	REFERENCE_DESIGN	legacy design/evidence may inform audit but cannot override Greenfield authority
+CHECKPOINT_SHA256SUMS.txt	23084	e4c4bc05eb6cc0d9ae1c9cb73cd86b541a1ecf8b68ca61f06ec42ba6944f33e8	text-or-container	REFERENCE_DESIGN	legacy design/evidence may inform audit but cannot override Greenfield authority
+CURRENT_WORK_STATUS_2026-08-22.txt	10029	218de0be618b55870f839a96a5063d83642e912b2e8a4567b9cf617a9d655032	text-or-container	REFERENCE_HISTORY	historical evidence only
+Makefile	18848	001d7f0171e95548f0d2da8053d584f61b22a5dc62b8946419992d92a2b062a7	text-or-container	REFERENCE	read-only legacy evidence
+PROJECT_SPINE.json	13658	87e660cb8b8df215cbf804fdb44c9bb9b34f9fbc08a4afb98ada3c2e31412af4	text-or-container	REFERENCE_DESIGN	legacy design/evidence may inform audit but cannot override Greenfield authority
+README.md	6832	dcb40800a568f0c122ca887580151d1bf0bc31fcc6a22d5c56e68eab7f06fc47	text-or-container	REFERENCE_HISTORY	historical evidence only
+SOURCE_PROVENANCE.txt	550	66703da446bc3606c2548f5deaaaa114e5d6e05b21ed0da2fff0052859873379	text-or-container	REFERENCE_HISTORY	historical evidence only
+app/flutter/.gitignore	204	82c0234fdf5ed4618e0dc920abe1046cb5e4d16bac7b6f61ae9367bef2d5eddb	text-or-container	REFERENCE	read-only legacy evidence
+app/flutter/CMakeLists.txt	3495	65cb00daa21f04165d87ebabe5619d0a4e464229dabea3b1841cac0fa1fd2474	text-or-container	REFERENCE	read-only legacy evidence
+app/flutter/README.md	795	6d669faacbd56f3049058d9c4539f1677f0cb604aa8dd6d4665b44cad6072fbf	text-or-container	REFERENCE	read-only legacy evidence
+app/flutter/analysis_options.yaml	421	8229975530f03530521a6a36706a78578d2badccb91c86dfb250cd439b29edb7	text-or-container	REWRITE	Flutter host is rebuilt around new service/snapshot contract
+app/flutter/android/app/build.gradle	1701	791156317b575d9b55ae5c9db3c7152717fb35cfe8e26ccb1345ec40953caaee	text-or-container	REIMPLEMENT_CONCEPT	NDK/CMake/Java lessons only; rewritten
+app/flutter/android/app/src/debug/AndroidManifest.xml	220	3191c86e53211ec99ea59983d0095ecb49e69a337c4d47f252ba88eb817aef65	text-or-container	REWRITE_TOOLCHAIN	new Android tree owns product; legacy file is matrix/failure evidence only
+app/flutter/android/app/src/main/AndroidManifest.xml	1440	412a71fa0431091a2ee27bc402f7098d50a7392717e0fb30bbe70e078d67d776	text-or-container	REWRITE_TOOLCHAIN	new Android tree owns product; legacy file is matrix/failure evidence only
+app/flutter/android/app/src/main/kotlin/com/odpar/territorial_domain/MainActivity.kt	50955	3eeeb53a2cf34558504a7f1ded8abd7cd07d0f16f82a09d27f1d636de7a2e389	text-or-container	REWRITE_TOOLCHAIN	new Android tree owns product; legacy file is matrix/failure evidence only
+app/flutter/android/app/src/main/res/drawable/ic_launcher.xml	610	42f308ef67236ad074ee50821d145eb795a2fdf3f0c19a382af0fb00d27df524	text-or-container	REWRITE_TOOLCHAIN	new Android tree owns product; legacy file is matrix/failure evidence only
+app/flutter/android/app/src/main/res/drawable/launch_background.xml	183	c33c99e2edaf2a09690d156a6b7fd56392dfeaf6bd603bc3561c46847e2a6f4f	text-or-container	REWRITE_TOOLCHAIN	new Android tree owns product; legacy file is matrix/failure evidence only
+app/flutter/android/app/src/main/res/values/styles.xml	1258	f0bdf41e70500587604f7868e08060e96a802569365f1346e1a1f4e7e5151c8b	text-or-container	REWRITE_TOOLCHAIN	new Android tree owns product; legacy file is matrix/failure evidence only
+app/flutter/android/app/src/main/res/values-night/styles.xml	998	5083350027a8fff3fd9277346f20dea7402c19322afb2a401964a567dba74857	text-or-container	REWRITE_TOOLCHAIN	new Android tree owns product; legacy file is matrix/failure evidence only
+app/flutter/android/app/src/profile/AndroidManifest.xml	230	707f2bd60cf655c13ed115a85519ba66d45c10b4bd6a6bfe0e130b7e31015739	text-or-container	REWRITE_TOOLCHAIN	new Android tree owns product; legacy file is matrix/failure evidence only
+app/flutter/android/build.gradle	322	37bb5e2370be94561043add48ffcc5a939b438f226fc0666a6a1e6a826794d1a	text-or-container	REWRITE_TOOLCHAIN	new Android tree owns product; legacy file is matrix/failure evidence only
+app/flutter/android/gradle/wrapper/gradle-wrapper.properties	252	a180163249c7252412ddaee1c7adcf59f6494b1183136f690fbd9a3b8aaed00e	text-or-container	REIMPLEMENT_CONCEPT	Gradle epoch reference only
+app/flutter/android/gradle.properties	455	e74de97a1fcdf348f133a123f92174f3c5951ba569a8e671fe5e49c2fd84a041	text-or-container	REIMPLEMENT_CONCEPT	toolchain compatibility flags considered explicitly
+app/flutter/android/gradlew	404	5f0562f299fe236871ec3cee3519d31fb8e2f334396cb3abc7ab32c11c75461c	text-or-container	REWRITE_TOOLCHAIN	new Android tree owns product; legacy file is matrix/failure evidence only
+app/flutter/android/gradlew.bat	405	857ef7607690717181117b0df6e0e44999be528e3f061d6b3630c48a335aee67	text-or-container	REWRITE_TOOLCHAIN	new Android tree owns product; legacy file is matrix/failure evidence only
+app/flutter/android/settings.gradle	705	8e5bcf0a41a99a114e24d0ea5b47fd1a01dafd551191ebabb0707e5bd9168d4a	text-or-container	REIMPLEMENT_CONCEPT	plugin matrix reference only
+app/flutter/assets/music/afterimage_0_2/01_half_second_lag.mp3	5288108	8e565bee6515fd1e6d94e2516dd1d858033546c41ac1ea7166cf58444935dc84	binary	REFERENCE_ASSET	content asset retained only as read-only donor candidate; not imported into Slice 1
+app/flutter/assets/music/afterimage_0_2/02_not_quiet.mp3	5095652	1f6b2bd203bcdc3b5aff99393dc7efb0b0b8e2f00433e2e7aaaf3b0cc45d3df4	binary	REFERENCE_ASSET	content asset retained only as read-only donor candidate; not imported into Slice 1
+app/flutter/assets/music/afterimage_0_2/03_hear_myself_breathe.mp3	5242388	7d120bf299e9da30e90cadbf8b66d8bf96b8fe85cc2525a09113cfc521503426	binary	REFERENCE_ASSET	content asset retained only as read-only donor candidate; not imported into Slice 1
+app/flutter/assets/music/afterimage_0_2/04_quiet_not_empty.mp3	7547012	5c8504212e9c31cec2cbcd7c9b75e2cdc40bacf96064abba6bab84d3ea158176	binary	REFERENCE_ASSET	content asset retained only as read-only donor candidate; not imported into Slice 1
+app/flutter/assets/music/afterimage_0_2/05_i_dont_go_with_it.mp3	6941612	8927a31d84c68d0f9d5ffcf9e7bbc8aa986b699bbdcb54a2847f8e9c7db6fc9e	binary	REFERENCE_ASSET	content asset retained only as read-only donor candidate; not imported into Slice 1
+app/flutter/assets/music/afterimage_0_2/06_not_you_just_light.mp3	7095500	7e60282b9b760620bc00a758832aec196a3e7b5c34e4770484f7b3762441eb94	binary	REFERENCE_ASSET	content asset retained only as read-only donor candidate; not imported into Slice 1
+app/flutter/assets/music/afterimage_0_2/07_after_the_last_color.mp3	8873132	e2065c074c8267308fb1829a02c3a4b5212c2620162125678fef47eaedc3aaa9	binary	REFERENCE_ASSET	content asset retained only as read-only donor candidate; not imported into Slice 1
+app/flutter/assets/music/afterimage_0_2/08_half_second_lag_instrumental_rework.mp3	5386724	a3dd02404c0654a6c934595f339afc466079793d53f4a66bbb889015395830df	binary	REFERENCE_ASSET	content asset retained only as read-only donor candidate; not imported into Slice 1
+app/flutter/assets/music/afterimage_0_2/09_not_quiet_instrumental_rework.mp3	4767404	fb740e08a719a11f47776f5cb269d66eb3b02a70acca8211f99d415fa58f5f79	binary	REFERENCE_ASSET	content asset retained only as read-only donor candidate; not imported into Slice 1
+app/flutter/assets/music/afterimage_0_2/10_hear_myself_breathe_instrumental_rework.mp3	4634300	8b83001a1f0b7ba8a141b30ec8bf76d5ae3041c05e41a820323d05f45aa96626	binary	REFERENCE_ASSET	content asset retained only as read-only donor candidate; not imported into Slice 1
+app/flutter/assets/music/afterimage_0_2/11_quiet_not_empty_instrumental_rework.mp3	4230668	31191452f86063ec732e4f660b94916213d069ba2957fcc1afb248f91ea42807	binary	REFERENCE_ASSET	content asset retained only as read-only donor candidate; not imported into Slice 1
+app/flutter/assets/music/afterimage_0_2/12_i_dont_go_with_it_instrumental_rework.mp3	4324124	59a0af0c5c68e308cd27ff2b4c8edce76955b669f2912d069df61fbc8ce5d5e0	binary	REFERENCE_ASSET	content asset retained only as read-only donor candidate; not imported into Slice 1
+app/flutter/assets/music/afterimage_0_2/catalog.json	7650	e0d84f46b78a7b39a76d8778781af83158f0ca8caf73cf729379f5d7cce57dc5	text-or-container	REFERENCE_ASSET	content asset retained only as read-only donor candidate; not imported into Slice 1
+app/flutter/lib/main.dart	4853	60373074cade4c195707a3d8322c732a74b91b307cf9ab8150db57dc380f25bc	text-or-container	REWRITE	Flutter host is rebuilt around new service/snapshot contract
+app/flutter/lib/odpar_territorial_domain_ffi.dart	39	ee50cf2b021cf8bf38daa8db1c2c99441d4bc4c0260da2718539dc6ade4d2b2b	text-or-container	REWRITE	legacy FFI surface rejected
+app/flutter/lib/src/engine/game_runtime.dart	42620	d5f156af0a436057fceb11caf3ee2f22bbf28193dab01ba61414b61c8c122861	text-or-container	REWRITE	synchronous Flutter ticker/runtime ownership rejected
+app/flutter/lib/src/engine/game_snapshot.dart	18735	2e05913bea34344fa0d55f963d0e3e2f1faa94d8f894e27ee13d1ab7849d5d2c	text-or-container	REWRITE	Flutter host is rebuilt around new service/snapshot contract
+app/flutter/lib/src/input/input_router.dart	12117	91e485d8b0a77ae1eab105d30e984bf8a65d14f04140c3e292f6adbda0aaef4d	text-or-container	REWRITE	camera sign/decay/gesture behavior rewritten for Slice 1
+app/flutter/lib/src/native/odg_bindings.dart	55203	62acac664eab7b3d50552117a28463e707e5563c2c3943357803d1a99b827a0e	text-or-container	REWRITE	ABI regenerated from new schema
+app/flutter/lib/src/platform/android_host.dart	7381	9f9d991049250fc65c74b834b225f394365bbb272fc3a6c715155ad192af3414	text-or-container	REWRITE	Flutter host is rebuilt around new service/snapshot contract
+app/flutter/lib/src/profile/game_profile.dart	7060	c86abfbf86d313d3ed7b978fb58c127445f0628db3b2b3f6b55d8e354d02f685	text-or-container	RETIRE_PRESENTATION	legacy product presentation is not inherited
+app/flutter/lib/src/render/raster_budget.dart	3333	aa2b6d1e93336eabce612f28682f9b94a802eb0dd1a69bce5ca218e88e335e2b	text-or-container	REWRITE	Flutter host is rebuilt around new service/snapshot contract
+app/flutter/lib/src/skins/avatar_skin_service.dart	2413	08590f798bdaf0475d84cc976e1fe8e02a08b76793b81ccb8ca1ea019cc44e61	text-or-container	RETIRE_PRESENTATION	legacy product presentation is not inherited
+app/flutter/lib/src/ui/artifacts/artifacts_panel.dart	5764	c75ea35f877bf2b1a3e547a22b842b95210d9a18efd470c465a89802c196373b	text-or-container	RETIRE_PRESENTATION	legacy product presentation is not inherited
+app/flutter/lib/src/ui/controls/control_editor.dart	4267	c9ab5a26ffb8f8626007a829dfaa9a71c6725190c64b8a99b830318b3bce302c	text-or-container	RETIRE_PRESENTATION	legacy product presentation is not inherited
+app/flutter/lib/src/ui/crafting/station_panel.dart	14736	9175a8a8feb330e4ba86ab87d4efa495571aa0f08b65038cac85096ee3b212e0	text-or-container	RETIRE_PRESENTATION	legacy product presentation is not inherited
+app/flutter/lib/src/ui/design_system.dart	4772	a6e164eaf7570c32a69428f5dc30434c206093dc1abd3c74377a8e6e35926eed	text-or-container	RETIRE_PRESENTATION	legacy product presentation is not inherited
+app/flutter/lib/src/ui/game/hotbar.dart	4524	4bc31e1ccdd26b1b3ba02472254d70bd02ed490679d0f8ee16140ba7c7336b9b	text-or-container	RETIRE_PRESENTATION	legacy product presentation is not inherited
+app/flutter/lib/src/ui/game_screen.dart	73940	be67c9225b269f824efc4d52d8fbf34d2b10877cee7929bf68da071ecc43ecfb	text-or-container	REWRITE	legacy HUD/input/presentation rejected
+app/flutter/lib/src/ui/inventory/inventory_panel.dart	11073	f3f7061c603e4181a383f3017c5e35b474a61d703153cf6d25264fd0f71b70fc	text-or-container	RETIRE_PRESENTATION	legacy product presentation is not inherited
+app/flutter/lib/src/ui/item_glyph.dart	21052	73232431ba20f19e1f02d130dab7a4cdb7c1b3c1f45180769cb6c6be003190d7	text-or-container	RETIRE_PRESENTATION	legacy product presentation is not inherited
+app/flutter/lib/src/ui/map/domain_map.dart	15990	69db18e0045261906ed148483ab847591c5fb296b8ce908c20e50ca5194f6009	text-or-container	RETIRE_PRESENTATION	legacy product presentation is not inherited
+app/flutter/lib/src/ui/music/music_panel.dart	9271	58cf7a5e538b8b75774375cb2bbce6d3adbb3c5fcf442f1b427b2d7f1a8d4549	text-or-container	RETIRE_PRESENTATION	legacy product presentation is not inherited
+app/flutter/lib/src/ui/skins/avatar_panel.dart	3194	d074213d65f5db1efa6b3247d854180310ce8cc28bf7e99d52f4f7fa68725f3e	text-or-container	RETIRE_PRESENTATION	legacy product presentation is not inherited
+app/flutter/pubspec.yaml	435	a5d88b581a10ce3d120d80c1309042b1dac0f442c8182f2c2d559453776b3a73	text-or-container	REWRITE	Flutter host is rebuilt around new service/snapshot contract
+app/flutter/test/ffi_layout_test.dart	2793	5ec4a35eff6d9cfd1f8b0c336f7c4814cc665ede03b48c7fb51dc0161d82c96c	text-or-container	REWRITE	Flutter host is rebuilt around new service/snapshot contract
+app/flutter/test/input_router_test.dart	3129	f4c71c630daa530ad9f0922af6abb5423ba5afb9bda9161ef180bb782d257b13	text-or-container	REWRITE	Flutter host is rebuilt around new service/snapshot contract
+app/flutter/test/raster_budget_test.dart	2272	ef80e8d4886f44717c8151e6c52a0d68e55ffa31ae990dc706645a5d6e251e80	text-or-container	REWRITE	Flutter host is rebuilt around new service/snapshot contract
+app/web/README.md	611	8f098ba653241d6324377e12506a1df871e40f193a0a20f579dabf14ebbbdbcd	text-or-container	RETIRE_PRODUCT_PATH	web is not the Greenfield product authority
+app/web/index.html	54085	dd7ae635878a59fd78554ab33c74a7cde89967860dd16b1bab078386a2813c5f	text-or-container	RETIRE_PRODUCT_PATH	web is not the Greenfield product authority
+architecture/ratchets.json	512	dbbd48fa9484809617843f1f013b8ded7f780184c75cffac1c73929094213504	text-or-container	REFERENCE_DESIGN	legacy design/evidence may inform audit but cannot override Greenfield authority
+docs/ANDROID_APP.md	1559	dc56ac2a41cda50e486020a03a72c8d077bec69c59e5e4909d2a9b14706d51e1	text-or-container	REFERENCE_DESIGN	legacy design/evidence may inform audit but cannot override Greenfield authority
+docs/APP_EMBEDDING.md	1796	495884809d8ad5508be705fc94fd221cf403b79203accbc4f647992d885f939c	text-or-container	REFERENCE_DESIGN	legacy design/evidence may inform audit but cannot override Greenfield authority
+docs/ARCHITECTURE.md	7010	0f49f2d0393f5509c9b183e8ae6597ad04a6765f1191f979b38d9824583bf90b	text-or-container	REFERENCE_DESIGN	legacy design/evidence may inform audit but cannot override Greenfield authority
+docs/CONTROL_PLACEMENT_V10.md	1370	ccff176694f810eb3bb326448379d8960511a9ca3814fa40cd93d70041d553ba	text-or-container	REFERENCE_DESIGN	legacy design/evidence may inform audit but cannot override Greenfield authority
+docs/CREDITS.md	1077	73786be2aa6ea46a3180f93caa692d8eaab9e42bdc5052d611ace97ff80d418f	text-or-container	REFERENCE_DESIGN	legacy design/evidence may inform audit but cannot override Greenfield authority
+docs/FLUTTER_APP.md	3895	99b000e776a3e043122510b5ee97208afbc851e01bf5da65a9f17b806394a9c4	text-or-container	REFERENCE_DESIGN	legacy design/evidence may inform audit but cannot override Greenfield authority
+docs/FUNCTION_GRAPH.dot	16978	caa0358e884fd4f96f3924c1ee8123de718bd27cca3ae320ef6804f6606b358c	text-or-container	REFERENCE_DESIGN	legacy design/evidence may inform audit but cannot override Greenfield authority
+docs/PRECISION_NAVIGATION_V10.md	2491	dfa17048397fc32edc2f4fa303bc1a2e43a30088e2fd48395fbdb6c38e9fbcad	text-or-container	REFERENCE_DESIGN	legacy design/evidence may inform audit but cannot override Greenfield authority
+docs/REUSE_LEDGER.md	2568	de398881c7e3bc07ae8c4179464e3caa9059cc6e33065ac55ad70701cf0038f7	text-or-container	REFERENCE_DESIGN	legacy design/evidence may inform audit but cannot override Greenfield authority
+docs/SYSTEM_GRAPH.dot	8544	3b38aa021e08be4237fe5ef7713851981a01a35767a150cccf80fbed7afbe642	text-or-container	REFERENCE_DESIGN	legacy design/evidence may inform audit but cannot override Greenfield authority
+docs/SYSTEM_GRAPH.json	98827	d7123c156e18c49550b7673e6935fca1359255daaec370153b7c1d7861c86e9a	text-or-container	REFERENCE_DESIGN	legacy design/evidence may inform audit but cannot override Greenfield authority
+docs/SYSTEM_GRAPH.md	12784	9ed7385226af41bb79cf392d66e0398c7bad222858866c5f4f2c87db1e0055fe	text-or-container	REFERENCE_DESIGN	legacy design/evidence may inform audit but cannot override Greenfield authority
+docs/SYSTEM_GRAPH.svg	51297	4b97dfc93d7fcac8500234105e979a1b18e4a4fd0561916ff4506037097b365b	text-or-container	REFERENCE_DESIGN	legacy design/evidence may inform audit but cannot override Greenfield authority
+docs/TERRITORY_CHANGESET.md	3078	05fc4165ed7fc6a6643ac72517b22ffd736f4261576802452a2e1e8b37c4dfeb	text-or-container	REFERENCE_DESIGN	legacy design/evidence may inform audit but cannot override Greenfield authority
+docs/TURRET_LOGISTICS_V8.md	1445	d4020e8015dbfa297d17d05fd5247c4507dc0201424f801fd2201b8cf75bccb6	text-or-container	REFERENCE_DESIGN	legacy design/evidence may inform audit but cannot override Greenfield authority
+docs/V15_ACCEPTANCE.md	6919	19a307ca86f71b2854c56a7e0d5bdd846be717764b897b2de1051a7fb20f60cc	text-or-container	REFERENCE_DESIGN	legacy design/evidence may inform audit but cannot override Greenfield authority
+docs/architecture/SYSTEM_GRAPH_MANIFEST.json	20664	d85438af96073056e81313b69e1182b4a00dafc20ce3ab3042a3c5ee645984bc	text-or-container	REFERENCE_DESIGN	legacy design/evidence may inform audit but cannot override Greenfield authority
+docs/history/HANDOFF_API29_ABI6_SAVE18_2026-08-20.md	44249	d5238157110ba0f21fa823acced9ed1eade954705dffd8d69e9479b5b6093347	text-or-container	REFERENCE_HISTORY	historical evidence only
+docs/history/checkpoints/CHECKPOINT_FREEZE_2026-08-21-0050.md	794	f32bd3ee0fa0a28db9c418d15f652353ae9397b6fde1d94ab3324f57073dcf81	text-or-container	REFERENCE_HISTORY	historical evidence only
+docs/history/checkpoints/CHECKPOINT_FREEZE_2026-08-21-0201.md	847	6bc4d1678de98b7c82ffa21d4192641e9f2223eb2df241f1e75af6806aeca7c9	text-or-container	REFERENCE_HISTORY	historical evidence only
+docs/history/checkpoints/CHECKPOINT_MAP_RENDER_2026-08-21.md	681	7db920731515c85ef3bc0a7abf78cb3a1900770662caaf6888d077b7d42f369c	text-or-container	REFERENCE_HISTORY	historical evidence only
+docs/history/checkpoints/CHECKPOINT_MAP_RENDER_SHA256.txt	627	3195f699161e0afc674f130ce642f8b1ed2ae867e834c5aad080479ea5c41013	text-or-container	REFERENCE_HISTORY	historical evidence only
+docs/history/checkpoints/CHECKPOINT_NATIVE_AUDIT_2026-08-21.md	2556	051436ac548e2c8256e4eafdb0236ca589e6c25beed2dad7ec49c4879118804d	text-or-container	REFERENCE_HISTORY	historical evidence only
+docs/history/checkpoints/CHECKPOINT_NATIVE_AUDIT_SHA256.txt	202	d06cfa36879d3f743951ba7de77c1fbb595d12a12a46d5dc0ef0f5b159d23670	text-or-container	REFERENCE_HISTORY	historical evidence only
+docs/history/checkpoints/CHECKPOINT_STATUS_2026-08-20.md	6648	80d57a5557a545c26d3d4ab9fd503e2d64b6a15a93a68ea10af2443c2ebf48ff	text-or-container	REFERENCE_HISTORY	historical evidence only
+docs/history/checkpoints/CHECKPOINT_WORLD_IDENTITY_2026-08-21.md	499	b9bb1ff83ed8f0875f335b61709f959a8a95c855c83998dea3f0c9d121542ed7	text-or-container	REFERENCE_HISTORY	historical evidence only
+docs/history/checkpoints/CHECKPOINT_WORLD_IDENTITY_SHA256.txt	649	37b6409c954eb022af747b319f6abc6194abd1066011d77790959e4b12c313a1	text-or-container	REFERENCE_HISTORY	historical evidence only
+docs/history/checkpoints/HANDOFF_NEXT_CHAT_2026-08-20.md	10157	c1f03afa29b6bba499a6e6e8e3eb6fd5fd471ddd709471a65797837225e47616	text-or-container	REFERENCE_HISTORY	historical evidence only
+docs/history/checkpoints/IMPLEMENTATION_STATUS.txt	995	90dbd865b1be7f9bc5416b1612e7b0676a269cb7c34f4504aa7f698f14b7b305	text-or-container	REFERENCE_HISTORY	historical evidence only
+docs/history/checkpoints/IMPLEMENTATION_STATUS_2026-08-21.txt	8880	dcd55daf821377a7910c94dd9c4d55f27260fcec7eea31cdcce2448e2a1b7d9e	text-or-container	REFERENCE_HISTORY	historical evidence only
+docs/history/checkpoints/IMPLEMENTATION_STATUS_ITEMS_WORK_FEEDBACK_2026-08-21.txt	10333	f4d40248b332eece0b69ba8fb3122ff463bae1e46a2102d96dfc299f7e3fa513	text-or-container	REFERENCE_HISTORY	historical evidence only
+docs/history/checkpoints/IMPLEMENTATION_STATUS_LATEST.txt	2486	6b277d2e46cd4993745fec9cf229b07515ea86f4bb4e2353d3959a418ee6521e	text-or-container	REFERENCE_HISTORY	historical evidence only
+docs/history/checkpoints/IMPLEMENTATION_STATUS_PLAYER_REGRESSIONS_2026-08-21.txt	4197	badd3315aac45a82c5a762bd4a504d16af67e1a75b2d1f0740e060514d450228	text-or-container	REFERENCE_HISTORY	historical evidence only
+docs/history/checkpoints/IMPLEMENTATION_STATUS_WORKYIELD_2026-08-22.txt	1694	c1779e664b1c69abf102ee5a7aca876f96a79d59fef7c1b8135bab4fb43def12	text-or-container	REFERENCE_HISTORY	historical evidence only
+docs/history/checkpoints/NATIVE_GAME_AUDIT_2026-08-21.md	14407	e975bf302106a8b8d63cf7785dc0944611610c685c29d0a560b9f3368c6ae66a	text-or-container	REFERENCE_HISTORY	historical evidence only
+docs/history/checkpoints/RECOVERED_11AM_ECUADOR_2026-08-21.md	3958	ac9985b02ecb0709d66e7b6c5b408ed5173a42c022a4d380d388a68704b319ad	text-or-container	REFERENCE_HISTORY	historical evidence only
+engine/include/odpar_game.h	49796	a2027749ce92a4561185de0b9574e37794e563bb684cab9c326edd2790ab5c18	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/odpar_territorial_domain.exports.map	4521	9010b34bb78fe9e1a94a27b0c79525794a1b709a43d8f8e538bfe0b4d9af3a1a	text-or-container	REFERENCE	read-only legacy evidence
+engine/src/android_bridge.c	7121	a1ba89a3faf70a47ec13f624bd1fdcb356d53712f52df4bc41966898ffb49f0f	text-or-container	REWRITE	Android bridge rewritten around SurfaceTexture + service handle
+engine/src/artifacts.c	59504	c72ed507c3da1b1e527b8eec0d0acb23a40b6a0d83f6bc929e10779a06f04333	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/chunks.c	57041	6bab2b4df041064cc6ec20add2a697ccdc8ef83290b75559a7aa255cdfca81a6	text-or-container	REIMPLEMENT_CONCEPT	chunk working set / procedural + sparse-state ideas
+engine/src/construction.c	40708	ee89ede20634af035159d4c5067634c10bfe9c2fa015ce1b0bdd6d5edfadc8c9	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/construction_support.c	3296	502b7a003dc77976ddd3c278102d1d347fd1aaed4d549525f9f52e41ee43bc71	text-or-container	REIMPLEMENT_CONCEPT	support graph compact causality ideas
+engine/src/construction_support_internal.h	1253	95f6f1543de50046f0cf63bba62ebcec3a76758a49581b5bd61fdca446e3a255	text-or-container	REIMPLEMENT_CONCEPT	support graph representation
+engine/src/content_registry.c	7091	4973c8112f58dca996b2e1a18c3777ec8008d1975661b4f7df6dd0a8e0976c9a	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/crafting.c	20746	5bf396a7fecbd3c7e7bfd9ff54850aace80952121cb56a24f9ea522eed75149c	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/ecology.c	29706	e4c24df999f4ade8329ccfff624d486c48815cb112cdf259beb50c97e7c0b0de	text-or-container	REIMPLEMENT_CONCEPT	ecology scheduling/profile ideas
+engine/src/ecology_population.c	39212	a865d33b01e37a9767cbe39badecbbb83e086f531c705834b55bf114da9eae80	text-or-container	REIMPLEMENT_CONCEPT	population aggregation ideas
+engine/src/ecology_runtime_internal.h	9548	43ae9cc2aa74e1ae7a10b02a7025a5847c92480ba91ce7b3eba9be8b61d82ea1	text-or-container	REIMPLEMENT_CONCEPT	WARM/COLD reference
+engine/src/ecology_stocks.c	12351	da1e00c8b2153e943c44cc4befe18689a2b957b551c5e1a18ad75b04fb08996f	text-or-container	REIMPLEMENT_CONCEPT	stock accounting ideas
+engine/src/entities.c	19815	c43857de9866a6cb61225ffe73c4c4c9cb9942a3eb81d8109252fae9831a16db	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/environment.c	8424	a66454442f6b809022eec31fe0b48887469e11fba4b7495a55324adcb7d3ad4c	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/fauna.c	158828	40ee484b9f12bf28265b90ca8d82f586a3a520ee094846df5b840cd2bc697e36	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/flora_runtime_internal.h	1412	4a6aa5c9d10b7733d1a30418311575bae1f6e4aa950054cc8067fd096216b596	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/fluids.c	2939	8042580303142d06e38bfbd0578a1a9176fb166d8e544094d1c97af77a0544ff	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/game.c	44574	6e2a48882c3e01da19940d15d1a2829724597a029402d87fc2226c824b459613	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/game_internal.h	54162	16064fe8ea20443750c6c00afdbb49d4ea564fd51e1c7e5eb7af0982e79bfbbf	text-or-container	RETIRE	mega internal header shape is explicitly forbidden
+engine/src/geology.c	9569	7aac49a66f373a514497589fbe541bfd71af62b133baf28dc55c10ccda28ecf5	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/glyphs.c	2350	9d1ae4d668fe945fb680983d5732baf4de19523cd879264037e7c86159d286a6	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/hydrology.c	5897	0147cb3c1c9c41bc554451e5af11b505bafa8ccdf11c7cf7ba1f003a882f0d5d	text-or-container	REIMPLEMENT_CONCEPT	macro hydrology and bounded active work ideas
+engine/src/hydrology_internal.h	958	0bdf5799d51b30139bf5a1fb626d59e1781ba102e7262e97b2b56ef487bff522	text-or-container	REIMPLEMENT_CONCEPT	hydrology representation reference
+engine/src/interactions.c	80400	743785969728e7d8fc535a5b70c40b9e3f2157bbcf16f34443e41048d83861ec	text-or-container	REWRITE	proximity targeting rejected; Slice 2 will implement ray/hit/offer/lease
+engine/src/items.c	34556	b6248b069c23104385a3e9f43f465f251b0251e59533a9ac80b83f638c7d0bab	text-or-container	REIMPLEMENT_CONCEPT	transactional material/item presence lessons
+engine/src/map.c	11786	75fecfa6579f10f05c31757689902116863bf2b5cbfbf4131bece31b7c995b52	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/music_fx.c	7431	9392d4bd2c2740bbf6bf30878dc926b77f00ccc6a51001135455d68de69ef767	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/nutrition.c	9328	5ed0af6923d1be8120881ae1dadf3c029ea6159154d2f037a8fe6c52aeb43c27	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/platform.c	4705	26a60b7689fb4a57fc26aa46a6020a0d7b842b4b2a1e433a7afea8cd8ce30f34	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/platform_present_internal.h	928	f539de924778e26050ce08336b6891f585febc949cf04869f59cded6bc5293b2	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/presentation_catalog.c	6076	75808c24bcb9e5c38d733eaa12a32129aacbfc662b25b8521bc61b9773901fc7	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/presentation_internal.h	3330	9db3661d9d2ce07bb53314f84e8a5423db225c83543a3181d20df7cea14731e7	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/render.c	252100	0768cc87f351db5058009a71f1fac876ef011c7fcc3ddbd0fbeb091543671fab	text-or-container	RETIRE	legacy renderer shape is explicitly forbidden
+engine/src/resources.c	76521	c443be657c4d604cbd10ddbb54322a688b66ae2992d71941b7816ceb2da09999	text-or-container	REIMPLEMENT_CONCEPT	resource accounting lessons
+engine/src/save.c	83286	db6a381c050b8ec98a1aef65520fec630d73b9703d90735f8fc87fe68dc63cec	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/sim.c	204856	994fcae7a100775ab71c072b5e560199f4242967d268ef9a6ddb6e3dcd2d78f0	text-or-container	RETIRE	monolithic simulation owner shape is explicitly forbidden
+engine/src/survival.c	13025	d6774482570b9ab8b2607af0961ae4e8d0d9439fe6ae64872d754a31509e8324	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/survival_runtime_internal.h	964	1aa84dde30d69ce50eec29058f243b391ff2d810ad320f04047081dedc2b1a3b	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/territory_policy.c	824	8fbe4a299284071daaa459db72dedf9a0afb69c986718b950fc6f56ef6c44759	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/texture_store.c	5157	53eabb91cba27e266eba4dd7f5690934f5252f3ec72ee81e308465665919ba60	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/world_coords_internal.h	2538	b6603010dbb11476e01528b5637a8272e5c4ea1b6be142568bbe9ed4cf4c1153	text-or-container	REIMPLEMENT_CONCEPT	64-bit/global coordinate reference
+engine/src/world_edit.c	7216	6b91eef6b09d124e1d2545a2dde0e5afb0a291d5c8322e82d7dc3d560613a70f	text-or-container	REIMPLEMENT_CONCEPT	sparse world delta ideas
+engine/src/world_edit_internal.h	2434	d313eeffee4f9aa00182b40743fe542504192bafd1dd862b996b9c85cc20fdcc	text-or-container	REIMPLEMENT_CONCEPT	sparse world edit representation
+engine/src/world_physics.c	31272	28b41842c0f76a4b3c05a51a4681cde036d398576c56f11773344541dc7e7b97	text-or-container	REFERENCE_SOURCE	read-only behavior/bug archaeology; no direct file migration
+engine/src/world_surface_stack.c	6689	fb0b610a7391c443e93d0de537fd8005036488e5f6c19b30ba1edbce9bc82bfc	text-or-container	REIMPLEMENT_CONCEPT	surface/occupancy stack ideas
+engine/src/world_surface_stack_internal.h	2338	09a73d8ebd8eab5ab8b3c398c20167aab8b0661014e0ec5bc31c81e7c1e309ed	text-or-container	REIMPLEMENT_CONCEPT	surface stack representation
+engine/src/world_volume_internal.h	1173	74b63240a9a8b4ca57dfdc1751cbde55d1cecc0c2aa08111178a044f63ef63a1	text-or-container	REIMPLEMENT_CONCEPT	material occupancy reference
+engine/vendor/odm_rng.c	3271	a1d7c85d9eaf4a53734510b8a71370469b8248da3f17eb17a76f6648a45ecaf8	text-or-container	REIMPLEMENT_CONCEPT	deterministic RNG candidate after isolated audit
+engine/vendor/odm_rng.h	885	14a7275cfee4c9120cd7e3c862a16a3b3f55a7aa7451f587659e861a07b4b66a	text-or-container	REIMPLEMENT_CONCEPT	deterministic RNG API candidate after isolated audit
+engine/vendor/odm_status.c	1227	bff3884479ad0fb785ee244e9f8cc9a1dfdf8e5e07a231eba58c348b52fd647e	text-or-container	AUDIT_CANDIDATE	third-party/reusable primitive requires isolated provenance/API audit before admission
+engine/vendor/odm_status.h	1167	ce5b1ddbcc3f4ee782413bc4d1636dd30291030f2604baf73ea5edd9e784706f	text-or-container	AUDIT_CANDIDATE	third-party/reusable primitive requires isolated provenance/API audit before admission
+save.plist	430	8c88b36d3167c462303aaa99dd90978351f80036088c926f10b6399179055af4	text-or-container	REFERENCE_PROFILE	legacy profiler/run configuration only
+sim.plist	430	8c88b36d3167c462303aaa99dd90978351f80036088c926f10b6399179055af4	text-or-container	REFERENCE_PROFILE	legacy profiler/run configuration only
+tests/soak_game.c	9827	5ec27bcc11f30fcd6c8abdad745c9d5d50f799b55881a68fdbc8e48953f85df4	text-or-container	REVIEW_TEST_LATER	do not port mechanically; admit only when its system enters a Greenfield slice
+tests/test_bootstrap.c	5970	1543e46d8456f529e481c05ab617b0145cd5e4bcdb8035e6c4301ee5bde49a61	text-or-container	REWRITE_TEST	product/runtime contract changed; recreate against Greenfield API
+tests/test_bot_economy.c	23776	b7d0b327cab5aebe2c16d725c69300b7fc56d593c59ffc3bb43f033ee17110fc	text-or-container	REVIEW_TEST_LATER	do not port mechanically; admit only when its system enters a Greenfield slice
+tests/test_cave_mobility_unit.c	10862	a7d8a5490c87352de16f33096b7a8c9129754c8cb1b0dfc3640f123437818d01	text-or-container	REVIEW_TEST_LATER	do not port mechanically; admit only when its system enters a Greenfield slice
+tests/test_chunk_working_set_unit.c	2963	50391ce38283c4cce486b3807d4c844450423d21b9212ff8691878099cd0a462	text-or-container	REWRITE_INVARIANT_LATER	idea/invariant remains valuable but test is coupled to legacy implementation
+tests/test_coherence.c	6072	a926b1d2bc015c158ebecd9784184fa731a3fa462fa9885a279f5e72a6fd0e8f	text-or-container	REVIEW_TEST_LATER	do not port mechanically; admit only when its system enters a Greenfield slice
+tests/test_construction.c	37401	32beb93a216dbae2e631d7499144f47c4c59b6991cf43b10d4f2fc6920ac3f60	text-or-container	REVIEW_TEST_LATER	do not port mechanically; admit only when its system enters a Greenfield slice
+tests/test_content_registry_unit.c	3384	da1788e6c7000f28aa9f54e1955676615349f03d026b76faf929c9d972bb0964	text-or-container	REVIEW_TEST_LATER	do not port mechanically; admit only when its system enters a Greenfield slice
+tests/test_ecology_stocks_unit.c	3022	fe36837cb5aa77ff3af4281f1ac0730b7242762428d06aefd97e42952bc68b09	text-or-container	REWRITE_INVARIANT_LATER	idea/invariant remains valuable but test is coupled to legacy implementation
+tests/test_ecosystem.c	175200	d769601c8d1a73e5811c76fd1bbe2f65d338451de99eacc3ff3e00b3a169b424	text-or-container	REVIEW_TEST_LATER	do not port mechanically; admit only when its system enters a Greenfield slice
+tests/test_fauna_cold_unit.c	9185	88acb0d41ebc0dfe6e28ebbfff5cc1777277d2c64f65949a49ecf026479f42d0	text-or-container	REWRITE_INVARIANT_LATER	idea/invariant remains valuable but test is coupled to legacy implementation
+tests/test_fauna_loot_unit.c	4048	446582bb653ca0dfb99a8e3ed6c2d39fe22314e0490155c5602f54e874574e0d	text-or-container	REVIEW_TEST_LATER	do not port mechanically; admit only when its system enters a Greenfield slice
+tests/test_ffi.c	7889	523edc328442b171132b3febbc77eb07687cbcc1b92818d9592a6242b4a62ab1	text-or-container	REWRITE_TEST	product/runtime contract changed; recreate against Greenfield API
+tests/test_ffi_global_xz64_unit.c	8692	ad76043e563836cc7bf29143eabe1e33d772855a45ada6383098c187f35320c2	text-or-container	REWRITE_INVARIANT_LATER	idea/invariant remains valuable but test is coupled to legacy implementation
+tests/test_flora_cold_unit.c	7715	b813b243badcd3a22459769ee39a2d6fcab0925d89a30b429d557d509e81a68b	text-or-container	REWRITE_INVARIANT_LATER	idea/invariant remains valuable but test is coupled to legacy implementation
+tests/test_frame_presenter.c	2768	26983b7732a23ddf2386d01d1402b12e8658382cf225751c4876cadb9ba285c0	text-or-container	REWRITE_TEST	product/runtime contract changed; recreate against Greenfield API
+tests/test_game.c	78487	52f4c23eb10a1aef8eeb495cae269e4672526e5a0b3cdf55822d9b2b7981bf1b	text-or-container	REWRITE_TEST	product/runtime contract changed; recreate against Greenfield API
+tests/test_hydrology_unit.c	4857	d2076bf23132a89fcfa9ff7c1704761c0c52acd57589db49d7369e3046920b6d	text-or-container	REWRITE_INVARIANT_LATER	idea/invariant remains valuable but test is coupled to legacy implementation
+tests/test_map_marker_capacity_unit.c	2408	65ea3d045be5818f892356c33204fddeb056f429f728568b694e0669eb3b7961	text-or-container	REVIEW_TEST_LATER	do not port mechanically; admit only when its system enters a Greenfield slice
+tests/test_pickup_drop_unit.c	3173	94843f365cc9456ac002c729b5532611a30c8e128c246018cdd5f48cb27951cd	text-or-container	REWRITE_INVARIANT_LATER	idea/invariant remains valuable but test is coupled to legacy implementation
+tests/test_resource_lifecycle_unit.c	5812	eac82449c09417659b571ffd1c1f9946439983678f5be90ea9b80b299eaff18a	text-or-container	REWRITE_INVARIANT_LATER	idea/invariant remains valuable but test is coupled to legacy implementation
+tests/test_resource_snapshot_unit.c	2400	60da6c592302da30e7261369248b7d29be21cea9b3fd93de9a5b64179a42f5ca	text-or-container	REWRITE_INVARIANT_LATER	idea/invariant remains valuable but test is coupled to legacy implementation
+tests/test_save28_cohort_unit.c	22102	ddd0551918fdb015ad21d59de7b955833cf15c26ccc2f35adc90811998c12a96	text-or-container	RETIRE_TEST	experimental legacy SAVE compatibility is explicitly not a Greenfield contract
+tests/test_save29_cold_nest_unit.c	7154	a4e44423b5cf6b5f5efe48a6e51ac338664b2410c179276dcddf43721cc68958	text-or-container	RETIRE_TEST	experimental legacy SAVE compatibility is explicitly not a Greenfield contract
+tests/test_save30_cold_exact_fauna_unit.c	17130	30f3825ced759aa53ba63c526e68fc37790319398c9df3ec9990c014d716e596	text-or-container	RETIRE_TEST	experimental legacy SAVE compatibility is explicitly not a Greenfield contract
+tests/test_spatial_index_unit.c	7820	78f98586921140094f6766708ded441eff568bbe32e43d2d568016f2ce30d4fb	text-or-container	REWRITE_INVARIANT_LATER	idea/invariant remains valuable but test is coupled to legacy implementation
+tests/test_storage_lifecycle_unit.c	8770	412f367bf147dd30409d903c3b01063eae668be7d1288261082a5795ffb885bf	text-or-container	REWRITE_INVARIANT_LATER	idea/invariant remains valuable but test is coupled to legacy implementation
+tests/test_support_graph_unit.c	3034	9a46f5901590357694f20b2d0c4bbd7051a10c33de3ddfcbccba442c70543b55	text-or-container	REWRITE_INVARIANT_LATER	idea/invariant remains valuable but test is coupled to legacy implementation
+tests/test_surface_stack_unit.c	3970	9b35a8f4db4963c7decba97f927babe37f360ec62020418dac53c996d39b6e3f	text-or-container	REWRITE_INVARIANT_LATER	idea/invariant remains valuable but test is coupled to legacy implementation
+tests/test_survival_viability_unit.c	1819	f9061564ec828faa589e59e2cfbba5a9bbbbaf84441b7481a3c193d0100c048c	text-or-container	REWRITE_INVARIANT_LATER	idea/invariant remains valuable but test is coupled to legacy implementation
+tests/test_territory_combat.c	16554	c92cfde2a9c6dc8a897b009d70106af5fb3ffbb7c0bb9f0f35b6ec13d52baf95	text-or-container	REVIEW_TEST_LATER	do not port mechanically; admit only when its system enters a Greenfield slice
+tests/test_turret_interaction_unit.c	4426	5f80c594a54d9a3e1701592a13f849dbe8e88894737628088385d8186b053064	text-or-container	REVIEW_TEST_LATER	do not port mechanically; admit only when its system enters a Greenfield slice
+tests/test_windfall_unit.c	2649	fcde5b77b0e21fe2f8017a63392c6672c71509c09daeda62a290eb8b25b5948b	text-or-container	REVIEW_TEST_LATER	do not port mechanically; admit only when its system enters a Greenfield slice
+tests/test_work_yield_unit.c	7931	7649076f73c1a54f37e66dceeed2beb7962186b7eaf0230641135c9d867510f7	text-or-container	REVIEW_TEST_LATER	do not port mechanically; admit only when its system enters a Greenfield slice
+tests/test_world_continuity.c	13989	4bb6b0f343b4a96ad3b18345e0333ef159d3aa7703a9e131a1818e11173b2ac3	text-or-container	REWRITE_INVARIANT_LATER	idea/invariant remains valuable but test is coupled to legacy implementation
+tests/test_world_edit_mobility_unit.c	8995	dcfda9f49b66cb0bf4c9252b107cced1ef6e72790ae2130be6d594b209ef19e9	text-or-container	REWRITE_INVARIANT_LATER	idea/invariant remains valuable but test is coupled to legacy implementation
+tests/test_world_edit_unit.c	8878	2c03bf3d264e327cda3362964e4cb963a712e7b716dc75dbfe2e63d867cc1ae9	text-or-container	REWRITE_INVARIANT_LATER	idea/invariant remains valuable but test is coupled to legacy implementation
+tests/test_world_systems.c	75417	ee6ff1d33ce418f70b96c98ed5eef7c0366c3356578797176081a53819e39c6c	text-or-container	REVIEW_TEST_LATER	do not port mechanically; admit only when its system enters a Greenfield slice
+tests/test_world_volume_unit.c	3519	7bf2598b96751de7f109e05ffeb0414f7a62287ba29dcf3b90a02671984bf999	text-or-container	REWRITE_INVARIANT_LATER	idea/invariant remains valuable but test is coupled to legacy implementation
+tools/bench_render.c	3591	d66c587845255a328018f4a7030304b8aae52d52b48ddf529e2843a9ba928dbb	text-or-container	REWRITE_TOOL	tool intent may survive; implementation is not authoritative
+tools/capture_frame.c	1507	667bacae16c633979e98d45c5870d95a22391977067620ff855ad07bb037abb3	text-or-container	REWRITE_TOOL	tool intent may survive; implementation is not authoritative
+tools/capture_frame.sh	284	4857cf2a358c90791a504e756ab4f7d1460ed6aaa72247f8439eb54a4aa68322	text-or-container	REWRITE_TOOL	tool intent may survive; implementation is not authoritative
+tools/capture_graphics_audit.c	20264	a6458351bfe3cc7d6a567f223bd7f73b442555327b6975144a373c71c9799e59	text-or-container	REWRITE_TOOL	tool intent may survive; implementation is not authoritative
+tools/capture_graphics_showcase.c	1760	b16c2b92479b8129e2f02064f4f8449de7990c5db7716dd887e235b700aa4e14	text-or-container	REWRITE_TOOL	tool intent may survive; implementation is not authoritative
+tools/check_android_bridge_syntax.py	3123	dcb5c4cbc0859ae6d373dfdc93c8ed1db9bdc8514d1839bfe7ef9978afc58e6c	text-or-container	REWRITE_TOOL	tool intent may survive; implementation is not authoritative
+tools/check_android_release_contract.py	9115	314d00a8db92af317a8795b35e379a7fdecc1a16b9598f0c3395a0f80e508dc6	text-or-container	REIMPLEMENT_CONCEPT	artifact contract concept; rewritten
+tools/check_build_contract.py	8616	5016fb8ff5ecf7319d79763287b223f134d5e2a19e44fd7045b9a67c60eccf4e	text-or-container	REWRITE_TOOL	tool intent may survive; implementation is not authoritative
+tools/check_content_coupling.py	2443	8e6f7034e6134938860d0a70b6f0191f28f00c0aafa5496cf47e39c0e140e044	text-or-container	REWRITE_TOOL	tool intent may survive; implementation is not authoritative
+tools/check_docs_contract.py	4682	602733193ad8ab184389a225c68a14c4d81e0630550fe6166a4cbda8502a1aa1	text-or-container	REWRITE_TOOL	tool intent may survive; implementation is not authoritative
+tools/check_economy_authority.py	3223	457800193bdd5b316bac3d6f7702ac1173178d136e75d3636f882409ed3633df	text-or-container	REWRITE_TOOL	tool intent may survive; implementation is not authoritative
+tools/check_host_contract.py	43389	77415c0d2db4b46a8d72b345c8d50365832c2e8fa82f22dfecd91702a8649157	text-or-container	REWRITE_TOOL	tool intent may survive; implementation is not authoritative
+tools/check_music_catalog.py	5360	783259e2524fd7860577e1a09d20fd614086fbb4a024270edea1b2a146c3c3fa	text-or-container	REWRITE_TOOL	tool intent may survive; implementation is not authoritative
+tools/check_native_hardening.py	1595	a61f827e743a1fdf6da9dbc1b8b8be0a279b899635467a82cfccc2367f90bbd0	text-or-container	REIMPLEMENT_CONCEPT	native hardening concept; rewritten/absorbed
+tools/check_native_symbols.py	1583	3eea8e1300039a971035931776e15e50233d9557760fcdbd08ad1787acbedcef	text-or-container	REIMPLEMENT_CONCEPT	symbol allowlist concept; rewritten
+tools/check_render_content_coverage.py	5810	cb892455e8b787c71cf9d61a1e4b7433e0f0b0280fe63d80752ba2255caa9560	text-or-container	REWRITE_TOOL	tool intent may survive; implementation is not authoritative
+tools/check_reserved_contracts.py	3763	7dbdac0cb7bb80760a046c00639e160513f5e4a3c8da3acdd8106a0fab15b46d	text-or-container	REWRITE_TOOL	tool intent may survive; implementation is not authoritative
+tools/check_source_hygiene.py	1439	2e89739ce60d94db5d5aa2c2a34652a638d43a917723ace68917b54e0fae0ccc	text-or-container	REWRITE_TOOL	tool intent may survive; implementation is not authoritative
+tools/generate_system_graph.py	7772	6d74aaecb609dce792f37a501f54d51337fd0da230d979da7edc7e32c956bc5a	text-or-container	REWRITE_TOOL	tool intent may survive; implementation is not authoritative
+tools/make_bundle.py	723	475bd49fc37f23f54c5329469309f6d190f7263a9237d05f945352ccf881b64a	text-or-container	REWRITE_TOOL	tool intent may survive; implementation is not authoritative
+tools/odpar_doctor.py	3403	89fc1d8a4a9c2de3ba619def39eccceb95eb2b8c89932deb5397c244db0356ec	text-or-container	REWRITE_TOOL	tool intent may survive; implementation is not authoritative
+tools/prepare_api38_ci.py	2242	d69531d28870f29472e42d6f3b6b3a52312c05ef4a9801677f8bcd1323254393	text-or-container	REWRITE_TOOL	tool intent may survive; implementation is not authoritative
+tools/serve.py	335	ef2065e53b23664424053ce76dd70176ea47bbed983e77ad69fa7b1e264c227a	text-or-container	REWRITE_TOOL	tool intent may survive; implementation is not authoritative
+tools/verify_android_apk.py	6947	c03e5d7e75a46524ccbfebc428f863ecf4e74316c4704812c70109248095487b	text-or-container	REIMPLEMENT_CONCEPT	APK verification concept; rewritten
+tools/wasm_smoke.mjs	4522	528d240119e623511f601f56a64ba3b43efaffeb1ff6d6c535da736dbdd72610	text-or-container	REWRITE_TOOL	tool intent may survive; implementation is not authoritative

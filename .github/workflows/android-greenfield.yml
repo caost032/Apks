@@ -1,0 +1,124 @@
+name: Greenfield Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'engine/**'
+      - 'host/**'
+      - 'app/**'
+      - 'tools/**'
+      - 'CMakeLists.txt'
+      - 'Makefile'
+      - '.github/workflows/android-greenfield.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  apk:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      FLUTTER_VERSION: '3.47.1'
+      GRADLE_VERSION: '9.3.1'
+      ANDROID_PLATFORM: 'android-36'
+      ANDROID_BUILD_TOOLS: '36.0.0'
+      ANDROID_NDK: '28.2.13676358'
+      ANDROID_CMAKE: '3.22.1'
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - uses: gradle/actions/setup-gradle@v6
+        with:
+          gradle-version: ${{ env.GRADLE_VERSION }}
+
+      - name: Install coherent Android toolchain epoch
+        shell: bash
+        run: |
+          set -euo pipefail
+          yes | sdkmanager --licenses >/dev/null 2>&1 || true
+          sdkmanager \
+            "platforms;${ANDROID_PLATFORM}" \
+            "build-tools;${ANDROID_BUILD_TOOLS}" \
+            "ndk;${ANDROID_NDK}" \
+            "cmake;${ANDROID_CMAKE}"
+          flutter_root="$(dirname "$(dirname "$(readlink -f "$(command -v flutter)")")")"
+          printf 'flutter.sdk=%s\n' "$flutter_root" > app/android/local.properties
+          (cd app/android && gradle wrapper --gradle-version "$GRADLE_VERSION" --distribution-type bin)
+
+      - name: Greenfield native and architecture gate
+        run: make gate
+
+      - name: Flutter static and unit gates
+        working-directory: app
+        run: |
+          flutter pub get
+          dart format --output=none lib test
+          flutter analyze --fatal-infos
+          flutter test
+
+      - name: Build universal ARM product
+        working-directory: app
+        run: flutter build apk --release --target-platform android-arm,android-arm64
+
+      - name: Preserve and verify universal APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p app/dist/reports
+          cp app/build/app/outputs/flutter-apk/app-release.apk \
+            app/dist/ODPAR-TD-GREENFIELD-universal-armv7-arm64.apk
+          python3 tools/verify_android_apk.py \
+            --apk app/dist/ODPAR-TD-GREENFIELD-universal-armv7-arm64.apk \
+            --exact-abis armeabi-v7a,arm64-v8a \
+            --build-tools "$ANDROID_HOME/build-tools/$ANDROID_BUILD_TOOLS" \
+            --json-out app/dist/reports/universal-artifact.json
+
+      - name: Build and verify ABI splits
+        working-directory: app
+        run: flutter build apk --release --split-per-abi --target-platform android-arm,android-arm64
+
+      - name: Preserve and verify split APKs
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp app/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk \
+            app/dist/ODPAR-TD-GREENFIELD-armeabi-v7a.apk
+          cp app/build/app/outputs/flutter-apk/app-arm64-v8a-release.apk \
+            app/dist/ODPAR-TD-GREENFIELD-arm64-v8a.apk
+          python3 tools/verify_android_apk.py \
+            --apk app/dist/ODPAR-TD-GREENFIELD-armeabi-v7a.apk \
+            --exact-abis armeabi-v7a \
+            --build-tools "$ANDROID_HOME/build-tools/$ANDROID_BUILD_TOOLS" \
+            --json-out app/dist/reports/armeabi-v7a-artifact.json
+          python3 tools/verify_android_apk.py \
+            --apk app/dist/ODPAR-TD-GREENFIELD-arm64-v8a.apk \
+            --exact-abis arm64-v8a \
+            --build-tools "$ANDROID_HOME/build-tools/$ANDROID_BUILD_TOOLS" \
+            --json-out app/dist/reports/arm64-v8a-artifact.json
+          sha256sum app/dist/*.apk > app/dist/SHA256SUMS.txt
+
+      - name: Upload verified Greenfield APKs
+        uses: actions/upload-artifact@v7
+        with:
+          name: odpar-td-greenfield-apk
+          path: |
+            app/dist/*.apk
+            app/dist/SHA256SUMS.txt
+            app/dist/reports/*.json
+          if-no-files-found: error
+          retention-days: 14

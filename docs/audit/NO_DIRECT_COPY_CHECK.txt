@@ -1,0 +1,6 @@
+ODPAR Territorial Domain Greenfield - no direct legacy file copy check
+Guardian: tools/check_no_legacy_copy.py
+Greenfield files checked by final source gate: 68
+Legacy files indexed: 229 files / 228 unique byte hashes
+Byte-identical Greenfield/legacy file matches: 0
+Result: PASS
