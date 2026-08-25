@@ -50,8 +50,16 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          yes | sdkmanager --licenses >/dev/null 2>&1 || true
-          sdkmanager \
+          SDKMANAGER="${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager"
+          if [[ ! -x "$SDKMANAGER" ]]; then
+            SDKMANAGER="$(find "$ANDROID_HOME" -type f -path '*/bin/sdkmanager' -print -quit 2>/dev/null || true)"
+          fi
+          [[ -n "$SDKMANAGER" && -x "$SDKMANAGER" ]] || {
+            echo "sdkmanager not found under ANDROID_HOME=$ANDROID_HOME"
+            exit 1
+          }
+          yes | "$SDKMANAGER" --licenses >/dev/null 2>&1 || true
+          "$SDKMANAGER" \
             "platforms;${ANDROID_PLATFORM}" \
             "build-tools;${ANDROID_BUILD_TOOLS}" \
             "ndk;${ANDROID_NDK}" \
@@ -67,7 +75,7 @@ jobs:
         working-directory: app
         run: |
           flutter pub get
-          dart format --output=none lib test
+          dart format lib test
           flutter analyze --fatal-infos
           flutter test
 

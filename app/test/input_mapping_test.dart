@@ -1,3 +1,5 @@
+import 'dart:ui' show Size;
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:odpar_territorial_domain_greenfield/src/input/game_input_controller.dart';
