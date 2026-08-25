@@ -71,6 +71,17 @@ cmake = (ROOT / "CMakeLists.txt").read_text()
 if "max-page-size=16384" not in cmake or "common-page-size=16384" not in cmake:
     errors.append("native Android target must request 16 KiB ELF page alignment")
 
+workflow = (ROOT / ".github/workflows/android-greenfield.yml").read_text()
+abi_authority = "ODPAR_FLUTTER_TARGET_PLATFORMS"
+if f"{abi_authority}: 'android-arm,android-arm64'" not in workflow:
+    errors.append("CI product ABI authority must be exactly ARMv7 + ARM64")
+if workflow.count(f'--target-platform "${abi_authority}"') != 2:
+    errors.append("universal and split builds must consume the same CI ABI authority")
+if abi_authority not in cmake:
+    errors.append("CMake must consume the same CI ABI authority as Flutter")
+if "ODPAR Greenfield: skipping native engine for non-product ABI" not in cmake:
+    errors.append("CMake must reject non-product externalNativeBuild ABI emission")
+
 # Detect known legacy synchronous entry points if they ever leak back into UI.
 for path in (ROOT / "app/lib/src/ui").rglob("*.dart"):
     text = path.read_text(errors="replace")
@@ -83,4 +94,4 @@ if errors:
     for error in errors:
         print(f" - {error}")
     raise SystemExit(1)
-print("product contract: OK (worker ownership, natural camera, Android epoch, 16 KiB)")
+print("product contract: OK (worker ownership, natural camera, Android epoch, single ABI authority, 16 KiB)")

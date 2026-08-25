@@ -17,7 +17,9 @@ Slice 1 deliberately starts from the last **coherent proven matrix** documented 
 | minSdk | 24 |
 | Product ABIs | armeabi-v7a, arm64-v8a |
 
-The matrix may be upgraded later, but only as one tested epoch. `build.gradle` contains no `abiFilters`; the CI build command is the single product ABI selection authority.
+`build.gradle` contains no `abiFilters`. The single product ABI authority is the CI variable `ODPAR_FLUTTER_TARGET_PLATFORMS=android-arm,android-arm64`, which is passed directly to both Flutter APK build commands. CMake consumes that same variable only to suppress `libodpar_greenfield.so` for Gradle/Flutter's automatically configured non-product ABI configurations. It does not define an independent product ABI list.
+
+This is necessary because Flutter 3.35+ automatically configures broad release ABI filters that include x86_64 for fat APK builds. An external CMake target can otherwise be emitted for x86_64 even when the product command requests only ARM. The shared CI variable keeps Flutter packaging and the C11 engine on one authority while preserving the architectural ban on static `abiFilters` in app Gradle files.
 
 Flutter 3.47.1 was published as stable on 2026-08-19 and bundles Dart 3.13.1; the package SDK floor therefore targets the same Dart 3.13 epoch instead of an unrelated older language baseline.
 

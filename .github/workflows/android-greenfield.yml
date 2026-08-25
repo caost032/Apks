@@ -27,6 +27,9 @@ jobs:
       ANDROID_BUILD_TOOLS: '36.0.0'
       ANDROID_NDK: '28.2.13676358'
       ANDROID_CMAKE: '3.22.1'
+      # Single product ABI authority. CMake consumes this exact same value so
+      # externalNativeBuild cannot leak an extra x86_64 lib into the fat APK.
+      ODPAR_FLUTTER_TARGET_PLATFORMS: 'android-arm,android-arm64'
 
     steps:
       - uses: actions/checkout@v6
@@ -81,7 +84,7 @@ jobs:
 
       - name: Build universal ARM product
         working-directory: app
-        run: flutter build apk --release --target-platform android-arm,android-arm64
+        run: flutter build apk --release --target-platform "$ODPAR_FLUTTER_TARGET_PLATFORMS"
 
       - name: Preserve and verify universal APK
         shell: bash
@@ -98,7 +101,7 @@ jobs:
 
       - name: Build and verify ABI splits
         working-directory: app
-        run: flutter build apk --release --split-per-abi --target-platform android-arm,android-arm64
+        run: flutter build apk --release --split-per-abi --target-platform "$ODPAR_FLUTTER_TARGET_PLATFORMS"
 
       - name: Preserve and verify split APKs
         shell: bash
