@@ -1,0 +1,66 @@
+name: WhiteLine Native APK
+
+on:
+  push:
+    branches:
+      - build/whiteline-native-2026-09-03
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    defaults:
+      run:
+        working-directory: whiteline-native
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Android SDK + NDK
+        shell: bash
+        run: |
+          set -e
+
+          export ANDROID_SDK_ROOT="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
+
+          yes | sdkmanager --licenses >/dev/null 2>&1 || true
+
+          sdkmanager \
+            "platforms;android-35" \
+            "build-tools;35.0.0" \
+            "ndk;27.2.12479018"
+
+      - name: Native tests
+        shell: bash
+        run: |
+          chmod +x tools/test_native.sh
+          chmod +x tools/build_android_apk_no_gradle.sh
+          ./tools/test_native.sh
+
+      - name: Build APK
+        shell: bash
+        run: |
+          export ANDROID_SDK_ROOT="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
+          export ANDROID_NDK_ROOT="$ANDROID_SDK_ROOT/ndk/27.2.12479018"
+
+          export ODPAR_ANDROID_PLATFORM=35
+          export ODPAR_BUILD_TOOLS=35.0.0
+          export ODPAR_ANDROID_MIN_API=26
+
+          ./tools/build_android_apk_no_gradle.sh
+
+      - name: Verify APK
+        shell: bash
+        run: |
+          APK="dist/android/ODPAR-WhiteLine-Drift-0.7.0-native-arm64.apk"
+          test -f "$APK"
+          ls -lh "$APK"
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: ODPAR-WhiteLine-Drift-APK
+          path: whiteline-native/dist/android/ODPAR-WhiteLine-Drift-0.7.0-native-arm64.apk
+          retention-days: 30
