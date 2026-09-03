@@ -60,6 +60,10 @@ jobs:
           export ODPAR_BUILD_TOOLS=35.0.0
           export ODPAR_ANDROID_MIN_API=26
 
+          # NDK r27c native_app_glue.c has intentionally unused callback parameters.
+          # Keep -Werror for the project while allowing only this warning class.
+          sed -i 's/-Wall -Wextra -Werror/-Wall -Wextra -Werror -Wno-error=unused-parameter/' tools/build_android_apk_no_gradle.sh
+
           ./tools/build_android_apk_no_gradle.sh
 
       - name: Verify APK
